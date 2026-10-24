@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valiant Verification Systems — verification for complex systems</title>
+<meta name="description" content="We turn 'trusted' into a verification deficit, a gate and a certified reference — for any complex system, from physics to climate to AI.">
+<style>
+  :root{
+    --navy:#142e53; --navy2:#1c4a74; --teal:#1a9d8f; --teal2:#2fb8a6;
+    --ink:#14212e; --muted:#5b6b7a; --line:#dde7ee; --bg:#f5f8fa; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:50;background:rgba(245,248,250,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;color:var(--navy);font-size:14px}
+  nav .brand img{height:30px}
+  nav .links{display:flex;gap:22px;font-size:14px;font-weight:600}
+  nav .links a{color:var(--navy2);opacity:.85}
+  nav .links a:hover{opacity:1;text-decoration:none}
+  @media(max-width:820px){nav .links{display:none}}
+  header{padding:76px 0 56px;text-align:center}
+  header img.badge{width:132px;height:auto;margin-bottom:22px}
+  .kicker{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);font-weight:800;margin-bottom:14px}
+  h1{font-size:clamp(38px,6vw,64px);line-height:1.04;margin:0 0 20px;letter-spacing:-.02em;color:var(--navy)}
+  h1 em{font-style:normal;color:var(--teal)}
+  .lede{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:760px;margin:0 auto 30px}
+  .cta{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px}
+  .btn.primary{background:var(--teal);color:#fff}
+  .btn.ghost{border:1.5px solid var(--navy);color:var(--navy)}
+  .btn.primary:hover,.btn.ghost:hover{text-decoration:none;opacity:.92}
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  section.tight{padding:56px 0}
+  h2{font-size:clamp(26px,3.4vw,38px);line-height:1.12;margin:0 0 16px;letter-spacing:-.015em;color:var(--navy)}
+  h3{font-size:19px;margin:0 0 8px;color:var(--navy)}
+  .muted{color:var(--muted)}
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(14,40,70,.05)}
+  .card .tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:800;margin-bottom:10px}
+  .num{background:linear-gradient(180deg,#fff, #f0f6f9);border:1px solid var(--line);border-radius:18px;padding:30px 22px;text-align:center}
+  .num b{display:block;font-size:clamp(30px,4vw,44px);color:var(--navy);letter-spacing:-.02em}
+  .num span{font-size:13px;color:var(--muted);font-weight:600}
+  blockquote{margin:0;padding:18px 22px;border-left:4px solid var(--teal);background:#eef7f5;border-radius:0 10px 10px 0;color:var(--navy);font-size:17px;font-weight:600}
+  ul.clean{list-style:none;padding:0;margin:0}
+  ul.clean li{padding:12px 0 12px 30px;position:relative;border-bottom:1px solid var(--line);color:var(--muted)}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li:before{content:"";position:absolute;left:0;top:19px;width:12px;height:12px;border-radius:50%;background:var(--teal)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15px}
+  th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#eef3f7;color:var(--navy);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  tr:last-child td{border-bottom:0}
+  td.good{color:var(--teal);font-weight:700}
+  td.warn{color:#b45309;font-weight:600}
+  .note{font-size:12.5px;color:var(--muted);margin-top:12px}
+  .btm{background:var(--navy);color:#dbe7f2;padding:64px 0;text-align:center}
+  .btm h2{color:#fff}
+  .btm a{color:#7fe0d3}
+  footer{background:#0f2140;color:#8fa2b8;font-size:13px;padding:26px 0}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><img src="assets/badge.png" alt="">VALIANT VERIFICATION SYSTEMS</a>
+  <div class="links">
+    <a href="#who">Who we are</a>
+    <a href="#proof">The proof</a>
+    <a href="#physics">Physics</a>
+    <a href="#climate">Climate</a>
+    <a href="#value">Value</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div></nav>
+
+<a id="top"></a>
+<header>
+  <div class="wrap">
+    <img class="badge" src="assets/badge.png" alt="Valiant Verification Systems badge">
+    <div class="kicker">Complex data verification &amp; solutions</div>
+    <h1>Trust is not a vibe.<br>It's a <em>number</em>.</h1>
+    <p class="lede">We turn “trusted” into a <strong>verification deficit</strong>, a <strong>gate</strong>, and a <strong>certified reference</strong> — for any complex system, from physics to climate to AI.</p>
+    <div class="cta">
+      <a class="btn primary" href="#proof">See the proof</a>
+      <a class="btn ghost" href="#contact">Talk to us</a>
+    </div>
+  </div>
+</header>
+
+<section id="who">
+  <div class="wrap g2 grid">
+    <div>
+      <div class="kicker">Who we are</div>
+      <h2>We don't build another model. We build the layer that tells you how much of it you can trust.</h2>
+      <p class="muted">Valiant Verification Systems is a verification company. We apply one discipline — <em>analyse the constraints, verify against known failure modes, repair the claim</em> — to the models that shape policies, prices and lives.</p>
+      <p class="muted">Our founding principle: <strong>don't ask a complex system for its values — ask for its constraints, its count, and its deficit.</strong> Everything else is covariance, not knowledge.</p>
+    </div>
+    <div class="card">
+      <div class="tag">The one-line answer</div>
+      <blockquote>Generation is solved. Verification is not. We make verification a product: a number with a denominator, a gate that can fail, and a reference you can defend.</blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="mission">
+  <div class="wrap g2 grid">
+    <div>
+      <div class="kicker">Our mission</div>
+      <h2>Change the world by making verification the default.</h2>
+      <p class="muted">Every complex model that shapes a policy, a price or a life should carry a <strong>verification deficit</strong> — not a confident press release. We want a world where “how verified is this?” is a question every institution has to answer with a number.</p>
+    </div>
+    <div>
+      <ul class="clean">
+        <li>Every complex model gets a deficit, not a vibe.</li>
+        <li>Every prediction carries its radius: verified vs extrapolated.</li>
+        <li>Every claim ships as a falsifiable contract, not a paragraph.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap">
+    <div class="kicker" style="text-align:center">The proof</div>
+    <h2 style="text-align:center;max-width:820px;margin:0 auto 14px">Two fields, run end-to-end. Not slideware — published, reproducible work.</h2>
+    <p class="muted" style="text-align:center;max-width:760px;margin:0 auto 40px">The same verification spine applied to the hardest case (theoretical physics) and the most consequential one (climate). Both are in the open <a href="https://github.com/robmitchellengineering-hub/pacland" target="_blank" rel="noopener">pacland</a> project.</p>
+    <div class="grid g2">
+      <div class="card">
+        <div class="tag">Physics</div>
+        <h3>A theory of everything predicts relations, never values.</h3>
+        <p class="muted">Five kernel-checked theorems (Lean, no <code>sorry</code>) prove the flux sector's exact content is a single constraint — the tadpole — plus labels. No exact, polynomial, duality-invariant formula can derive the Standard Model's 19 parameters.</p>
+        <p><a href="https://pacland.morpheus.nz" target="_blank" rel="noopener">Read the theorem tower →</a></p>
+      </div>
+      <div class="card">
+        <div class="tag">Climate</div>
+        <h3>A 2100 projection is extrapolation, not verification.</h3>
+        <p class="muted">On the historical record the deficit is <strong>m = 4</strong> (a ~68% certificate radius); for 2100 projections it is <strong>m = 0</strong> — nothing measured, nothing validated. The verified reference model is one model that passes every gate.</p>
+        <p><a href="https://pacland.morpheus.nz" target="_blank" rel="noopener">Read the climate deficit →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="physics">
+  <div class="wrap g2 grid">
+    <div>
+      <div class="kicker">The physics work</div>
+      <h2>What the theorem tower changes</h2>
+      <p class="muted">The flux sector's only exact structure is the constraint (the D3 tadpole) and the topology. We proved it symbolically and machine-checked it in Lean. The consequence is a no-go: the fifty-year search for an exact-formula unification is mathematically empty.</p>
+      <h3 style="margin-top:22px">What is now allowed</h3>
+      <ul class="clean">
+        <li>The debate shifts from vague philosophy to <strong>two named, falsifiable premises</strong> — the duality group and moduli-independence.</li>
+        <li>Research funding stops chasing provably-dead directions and moves to the constraint and the statistical measure.</li>
+        <li>“Unification” becomes a testable contract, not a hope.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="tag">Groundbreaking headlines</div>
+      <h3>The five theorems</h3>
+      <ul class="clean" style="margin-top:8px">
+        <li><strong>Mitchell's Uniqueness</strong> — the tadpole is the unique bilinear symplectic invariant.</li>
+        <li><strong>Constraint-First</strong> — the tadpole generates the <em>entire</em> invariant ring (Weyl FFT).</li>
+        <li><strong>Completeness</strong> — the tadpole is a complete invariant, up to content.</li>
+        <li><strong>Full-duality</strong> — holds for Sp(b₃) × SL(2,ℤ), not just Sp.</li>
+        <li><strong>Complete Exact Structure</strong> — the ToE's exact content = constraints + labels.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="climate">
+  <div class="wrap g2 grid">
+    <div class="card">
+      <div class="tag">Groundbreaking headlines</div>
+      <ul class="clean" style="margin-top:8px">
+        <li><strong>12 of 19</strong> CMIP6 models leak energy; <strong>6</strong> leak ocean mass — and the leak is in the atmosphere–ocean coupling, not the ocean.</li>
+        <li>“&gt;90% skilful” for an AI climate emulator is fidelity to a <em>leaky reference model</em>, not to the Earth.</li>
+        <li>Of 53 CMIP6 models, <strong>14 survive</strong> the trust gates; the verified reference model is <strong>GISS-E2-1-G at ECS 2.71 K</strong>.</li>
+        <li>The naive ensemble says <strong>3.78 K</strong>; the gated answer is <strong>3.08 K</strong> — 0.70 K of hot-model bias removed by verification, not averaging.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker">The climate work</div>
+      <h2>What the deficit changes</h2>
+      <p class="muted">A projection is not a verdict. It is a claim with a radius. Once you compute the deficit, policy splits cleanly into <strong>verified operations</strong> and <strong>extrapolation-deficit warnings</strong> — and you can see which models are leaking before you build a decision on them.</p>
+      <h3 style="margin-top:22px">What is now allowed</h3>
+      <ul class="clean">
+        <li>Disclosures and adaptation decisions built on a <strong>defensible number</strong>, not a naive ensemble mean.</li>
+        <li>A named, auditable “who to trust” list of models.</li>
+        <li>Explicit extrapolation warnings on every 2100 claim.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap grid g4">
+    <div class="num"><b>m=4</b><span>climate deficit on the record</span></div>
+    <div class="num"><b>12/19</b><span>CMIP6 models leak energy</span></div>
+    <div class="num"><b>53→14</b><span>models that survive the gates</span></div>
+    <div class="num"><b>2.71 K</b><span>verified reference ECS</span></div>
+  </div>
+</section>
+
+<section id="value">
+  <div class="wrap">
+    <div class="kicker">What this is worth</div>
+    <h2 style="max-width:860px">Where money is spent, and what the wrong number costs</h2>
+    <p class="muted" style="max-width:820px">Verification doesn't just make a claim honest — it changes a budget. The difference between a naive ensemble and a verified reference is a number a board can defend. The question is not whether the analytical work costs something; it's what the <em>unverified</em> number costs.</p>
+
+    <table style="margin-top:28px">
+      <thead>
+        <tr><th>Decision</th><th>Naive basis</th><th>Verified basis</th><th>The difference</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Climate adaptation provisioning</strong></td>
+          <td class="warn">3.78 K ensemble mean</td>
+          <td class="good">3.08 K gated / 2.71 K reference</td>
+          <td class="warn">≈ 0.7–1.1 K of hot-model bias removed from the central estimate</td>
+        </tr>
+        <tr>
+          <td><strong>Model selection</strong></td>
+          <td class="warn">average all 53 CMIP6 models</td>
+          <td class="good">14 trusted, each exclusion named</td>
+          <td class="warn">39 untrustworthy models excluded — and *why*</td>
+        </tr>
+        <tr>
+          <td><strong>Physics research direction</strong></td>
+          <td class="warn">continue the exact-formula search</td>
+          <td class="good">provably empty — stop</td>
+          <td class="good">years of misdirected theory avoided</td>
+        </tr>
+        <tr>
+          <td><strong>AI / software claims</strong></td>
+          <td class="warn">“it builds and runs”</td>
+          <td class="good">130 guards, 503 mutation tests, 26 hazards</td>
+          <td class="good">breakage caught before it ships</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">Illustrative framing based on the measured findings in the pacland work. The point is the direction and the mechanism: a verified number removes bias and exposure from the decision. Exact figures are set per engagement, not invented here.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap g3 grid">
+    <div class="card"><div class="tag">Consulting</div><h3>An audit, not a slide deck</h3><p class="muted">We compute the deficit for your model, run the gate suite, and give you a defensible reference — with the exact exclusions named.</p></div>
+    <div class="card"><div class="tag">Tooling</div><h3>The certificate API</h3><p class="muted">Bring a model and its data; get the deficit, the certificate radius and the trusted subset back as a reproducible result.</p></div>
+    <div class="card"><div class="tag">Standard</div><h3>A public rule</h3><p class="muted">The specification is open; the certification is audited. The goal is a standard, not a vendor lock-in.</p></div>
+  </div>
+</section>
+
+<div class="btm" id="contact">
+  <div class="wrap">
+    <div class="kicker">Start a conversation</div>
+    <h2>Bring us the model you are not sure about.</h2>
+    <p style="max-width:680px;margin:0 auto 26px">We'll tell you its verification deficit, which of its claims are extrapolation, and what the verified reference is. Then you decide what it's worth to act on it.</p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:info@valiantmusic.com.au">Email us</a>
+      <a class="btn ghost" style="border-color:#7fe0d3;color:#7fe0d3" href="https://pacland.morpheus.nz" target="_blank" rel="noopener">See the open work</a>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 Valiant Verification Systems</span>
+  <span>Complex data verification &amp; solutions · one spine, every field</span>
+</div></footer>
+
+</body>
+</html>
