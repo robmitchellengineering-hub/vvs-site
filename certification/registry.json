@@ -1,0 +1,20 @@
+{
+  "standard": "VDS v0.9",
+  "updated": "2026-10-24",
+  "entries": [
+    {
+      "id": "pacland-climate",
+      "product": "pacland",
+      "version": "0.9",
+      "level": "L3",
+      "m": 4,
+      "guardsProven": 4,
+      "gatesStructural": "5/5",
+      "audited": "2026-10-24",
+      "auditor": "VVS (self)",
+      "status": "self-certified-reference",
+      "report": "sha256:7d7f55d8dcfd4d86aea3acec520fac84eabba17e1cd6568e49aacec6ba04b2e3",
+      "note": "Reference implementation; self-run conformance, not an independent audit."
+    }
+  ]
+}
