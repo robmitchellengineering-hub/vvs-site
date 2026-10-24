@@ -299,13 +299,37 @@ async function vvsBuy(pkg){
   try{
     const res = await fetch('https://api.morpheus.nz/api/functions/createCertificationCheckout', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ package: pkg, seats, successUrl: location.origin + '/?subscribed=1', cancelUrl: location.origin + '/' })
+      body: JSON.stringify({ package: pkg, seats, successUrl: location.origin + '/?subscribed=1&session_id={CHECKOUT_SESSION_ID}', cancelUrl: location.origin + '/' })
     });
     const data = await res.json();
     if (data.url) location.href = data.url; else alert(data.error || 'Checkout unavailable right now.');
   }catch(e){ alert('Checkout unavailable right now — email info@valiantmusic.com.au'); }
 }
 function vvsMail(){ location.href = 'mailto:info@valiantmusic.com.au?subject=VDS%20design%20partner'; }
+async function vvsManage(sessionId){
+  try{
+    const res = await fetch('https://api.morpheus.nz/api/functions/createBillingPortal', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ sessionId, returnUrl: location.origin + '/' })
+    });
+    const data = await res.json();
+    if (data.url) location.href = data.url; else alert(data.error || 'Billing portal unavailable right now.');
+  }catch(e){ alert('Billing portal unavailable — email info@valiantmusic.com.au'); }
+}
+(function(){
+  const q = new URLSearchParams(location.search);
+  if (q.get('subscribed') === '1' && q.get('session_id')){
+    const bar = document.createElement('div');
+    bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;background:#12805A;color:#fff;padding:14px 20px;text-align:center;font-weight:600;z-index:100';
+    const link = document.createElement('a');
+    link.href = '#'; link.textContent = 'Manage seats / billing →';
+    link.style.cssText = 'color:#fff;text-decoration:underline';
+    link.onclick = function(){ vvsManage(q.get('session_id')); return false; };
+    bar.textContent = 'Subscription active. ';
+    bar.appendChild(link);
+    document.body.appendChild(bar);
+  }
+})();
 </script>
 
 <section id="faq">
