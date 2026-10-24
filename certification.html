@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VDS Certification — Valiant Verification Systems</title>
+<meta name="description" content="VDS Certified: the audited product. A signed conformance report, a public registry entry, and a version-scoped mark.">
+<link rel="icon" type="image/png" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
+<meta property="og:title" content="VDS Certification — Valiant Verification Systems">
+<meta property="og:description" content="VDS Certified: the audited product. A signed conformance report, a public registry entry, and a version-scoped mark.">
+<meta property="og:image" content="https://vvs.morpheus.nz/assets/social-card.png">
+<meta property="og:url" content="https://vvs.morpheus.nz/certification.html">
+<style>
+  :root{
+    --navy:#142e53; --navy2:#1c4a74; --teal:#1a9d8f; --teal2:#2fb8a6;
+    --ink:#14212e; --muted:#5b6b7a; --line:#dde7ee; --bg:#f5f8fa; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:50;background:rgba(245,248,250,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;color:var(--navy);font-size:14px}
+  nav .brand img{height:30px}
+  nav .links{display:flex;gap:22px;font-size:14px;font-weight:600}
+  nav .links a{color:var(--navy2);opacity:.85}
+  nav .links a:hover{opacity:1;text-decoration:none}
+  @media(max-width:820px){nav .links{display:none}}
+  header{padding:76px 0 56px;text-align:center}
+  header img.badge{width:132px;height:auto;margin-bottom:22px}
+  .kicker{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);font-weight:800;margin-bottom:14px}
+  h1{font-size:clamp(38px,6vw,64px);line-height:1.04;margin:0 0 20px;letter-spacing:-.02em;color:var(--navy)}
+  h1 em{font-style:normal;color:var(--teal)}
+  .lede{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:760px;margin:0 auto 30px}
+  .cta{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px}
+  .btn.primary{background:var(--teal);color:#fff}
+  .btn.ghost{border:1.5px solid var(--navy);color:var(--navy)}
+  .btn.primary:hover,.btn.ghost:hover{text-decoration:none;opacity:.92}
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  section.tight{padding:56px 0}
+  h2{font-size:clamp(26px,3.4vw,38px);line-height:1.12;margin:0 0 16px;letter-spacing:-.015em;color:var(--navy)}
+  h3{font-size:19px;margin:0 0 8px;color:var(--navy)}
+  .muted{color:var(--muted)}
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(14,40,70,.05)}
+  .card .tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:800;margin-bottom:10px}
+  .num{background:linear-gradient(180deg,#fff, #f0f6f9);border:1px solid var(--line);border-radius:18px;padding:30px 22px;text-align:center}
+  .num b{display:block;font-size:clamp(30px,4vw,44px);color:var(--navy);letter-spacing:-.02em}
+  .num span{font-size:13px;color:var(--muted);font-weight:600}
+  blockquote{margin:0;padding:18px 22px;border-left:4px solid var(--teal);background:#eef7f5;border-radius:0 10px 10px 0;color:var(--navy);font-size:17px;font-weight:600}
+  ul.clean{list-style:none;padding:0;margin:0}
+  ul.clean li{padding:12px 0 12px 30px;position:relative;border-bottom:1px solid var(--line);color:var(--muted)}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li:before{content:"";position:absolute;left:0;top:19px;width:12px;height:12px;border-radius:50%;background:var(--teal)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15px}
+  th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#eef3f7;color:var(--navy);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  tr:last-child td{border-bottom:0}
+  td.good{color:var(--teal);font-weight:700}
+  td.warn{color:#b45309;font-weight:600}
+  .src{font-size:13.5px;font-weight:600;color:var(--teal);line-height:1.9}
+  .buy{display:inline-block;margin-top:14px;padding:10px 18px;border:0;border-radius:8px;background:var(--teal);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
+  .buy.ghost{background:transparent;border:1.5px solid var(--navy);color:var(--navy)}
+  .num .per,.card h3 .per{font-size:14px;font-weight:600}
+  .note{font-size:12.5px;color:var(--muted);margin-top:12px}
+  .btm{background:var(--navy);color:#dbe7f2;padding:64px 0;text-align:center}
+  .btm h2{color:#fff}
+  .btm a{color:#7fe0d3}
+  footer{background:#0f2140;color:#8fa2b8;font-size:13px;padding:26px 0}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="index.html"><img src="assets/badge.png" alt="">VALIANT VERIFICATION SYSTEMS</a>
+  <div class="links">
+    <a href="index.html#who">Who we are</a>
+    <a href="index.html#proof">The proof</a>
+    <a href="index.html#physics">Physics</a>
+    <a href="index.html#climate">Climate</a>
+    <a href="spec.html">Spec</a>
+    <a href="certification.html">Certification</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</div></nav>
+
+<header style="padding:64px 0 40px">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker">Certification</div>
+    <h1 style="font-size:clamp(34px,5vw,54px)">VDS Certified — audited, version-scoped, revocable.</h1>
+    <p class="lede">The standard is open. Certification is the audited product: a signed conformance report, a public registry entry, and a mark that carries its own scope — so anyone can check it rather than trust it.</p>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>The audit, in five steps</h2>
+    <div class="grid g3" style="margin-top:24px">
+      <div class="card"><div class="tag">1 · Apply</div><h3>Send the model</h3><p class="muted">A candidate manifest, the evidence bundle, and read access to the model + data.</p></div>
+      <div class="card"><div class="tag">2 · Run</div><h3>Six checks</h3><p class="muted">The conformance suite recomputes the deficit, gates, mutations, reviewer independence and evidence.</p></div>
+      <div class="card"><div class="tag">3 · Review</div><h3>Independent check</h3><p class="muted">A sample of gates and mutation tests is re-run; the evidence bundle is confirmed.</p></div>
+      <div class="card"><div class="tag">4 · Decide</div><h3>Pass or gaps</h3><p class="muted">Pass → certificate. Fail → a written list of the gaps.</p></div>
+      <div class="card"><div class="tag">5 · Publish</div><h3>The registry</h3><p class="muted">Version, level, deficit, guards proven and the report hash, in public.</p></div>
+      <div class="card"><div class="tag">Mark</div><h3>Carries its scope</h3><p class="muted">product v{version} · audited {date} · L3 · m={m} · report hash — no evergreen badge.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="registry" class="tight">
+  <div class="wrap">
+    <h2>The public registry</h2>
+    <p class="muted" style="max-width:820px">Every certified version is listed with its scope. The first entry is a <strong>self-certified reference</strong> — we ran our own suite — and is labelled as such; the first independent certification is a design-partner run.</p>
+    <table style="margin-top:22px">
+      <thead><tr><th>Product</th><th>Version</th><th>Level</th><th>Deficit</th><th>Gates</th><th>Auditor</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>pacland</strong></td><td>0.9</td><td>L3</td><td>m = 4 of 12</td><td>5/5 structural</td><td>VVS (self)</td><td>self-certified reference</td></tr>
+      </tbody>
+    </table>
+    <p class="note">The machine-readable registry is <a href="https://github.com/robmitchellengineering-hub/vvs-spec" target="_blank" rel="noopener">in the standard repo</a>. The first independent entry appears after a design-partner run.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap g2 grid">
+    <div>
+      <h2>What the mark means</h2>
+      <ul class="clean">
+        <li>It is <strong>version-scoped</strong> and <strong>time-scoped</strong>.</li>
+        <li>It certifies the <strong>verification discipline</strong> — never the model's truth.</li>
+        <li>It is awarded at <strong>L3 only</strong>: L2 proven guards + a computed deficit + a certificate + the evidence bundle.</li>
+        <li>It is a <strong>licence</strong>, not a purchase — it lapses when the version changes.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Revocation (no grace period)</h2>
+      <ul class="clean">
+        <li>A <strong>green-when-nothing-ran</strong> regression.</li>
+        <li>A claimed guard that does not go red on its seeded fault.</li>
+        <li>The reviewer running on the same model as the coder.</li>
+        <li>An unproven guard added silently.</li>
+      </ul>
+      <p class="note">Revocations are public in the same registry, with the reason and the date.</p>
+    </div>
+  </div>
+</section>
+
+<div class="btm">
+  <div class="wrap">
+    <h2>Get certified.</h2>
+    <p style="max-width:680px;margin:0 auto 26px">Bring the model you're not sure about. We return the signed conformance report — and, if it holds, the mark.</p>
+    <div class="cta">
+      <a class="btn primary" href="index.html#pricing">See the tiers</a>
+      <a class="btn ghost" style="border-color:#7fe0d3;color:#7fe0d3" href="mailto:info@valiantmusic.com.au?subject=VDS%20certification">Start the conversation</a>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 Valiant Verification Systems</span>
+  <span>Complex data verification &amp; solutions · one spine, every field</span>
+</div></footer>
+</body></html>
