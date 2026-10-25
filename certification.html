@@ -133,17 +133,30 @@
   <div class="wrap">
     <h2>This is the badge</h2>
     <p class="muted" style="max-width:820px">A certified site wears it in its footer. It states its own scope — product, version, audit date, guards proven, gates structural — so a reader can check it rather than trust it.</p>
-    <a class="valiant-badge" href="#registry" title="A skipped or neutral check is a fail; every guard is mutation-proven. Version-scoped and revocable.">
-      <img class="valiant-badge__mark" src="assets/badge.png" alt="Valiant Verification">
-      <span class="valiant-badge__text"><strong>Valiant Verification Certified</strong> — ExampleCloud v3 · audited 2026-10-25 · 130 guards proven · 12/12 gates structural</span>
-    </a>
+    <details class="valiant-badge">
+      <summary title="Valiant Verification — click for the scope">
+        <img class="valiant-badge__mark" src="assets/badge.png" alt="Valiant Verification">
+      </summary>
+      <div class="valiant-badge__panel">
+        <strong>Valiant Verification Certified</strong>
+        <span>ExampleCloud v3 · audited 2026-10-25 · 130 guards proven · 12/12 gates structural</span>
+        <a href="#registry">What &ldquo;certified&rdquo; means &rarr;</a>
+      </div>
+    </details>
     <p class="note">Version-scoped and revocable: change the version and the badge lapses. Every line on it is a fact the audit produced, not a claim the site makes about itself.</p>
     <style>
-      .valiant-badge{display:inline-flex;align-items:center;gap:.55rem;padding:.45rem .9rem .45rem .5rem;border:1px solid #DDE7EE;border-radius:999px;background:#fff;text-decoration:none;margin-top:10px}
-      .valiant-badge:hover{border-color:#1A9D8F}
-      .valiant-badge__mark{width:1.6rem;height:1.6rem;object-fit:contain;display:block}
-      .valiant-badge__text{font-size:.82rem;line-height:1.35;color:#5B6B7A}
-      .valiant-badge__text strong{color:#142E53}
+      .valiant-badge{position:relative;display:inline-block;vertical-align:middle;line-height:0;margin-top:10px}
+      .valiant-badge summary{list-style:none;cursor:pointer;display:inline-block;padding:0;margin:0}
+      .valiant-badge summary::-webkit-details-marker{display:none}
+      .valiant-badge summary::marker{content:''}
+      .valiant-badge__mark{width:3.4rem;height:3.4rem;object-fit:contain;display:block;transition:transform .15s ease;filter:drop-shadow(0 1px 3px rgba(14,40,70,.25))}
+      .valiant-badge summary:hover .valiant-badge__mark{transform:scale(1.06)}
+      .valiant-badge[open] .valiant-badge__mark{transform:scale(1.06)}
+      .valiant-badge__panel{position:absolute;bottom:calc(100% + .55rem);left:0;width:max-content;max-width:21rem;background:#fff;border:1px solid #DDE7EE;border-radius:12px;padding:.7rem .9rem;box-shadow:0 10px 28px rgba(14,40,70,.18);z-index:60;font-size:.82rem;line-height:1.45;color:#5B6B7A;text-align:left;white-space:normal}
+      .valiant-badge__panel strong{display:block;color:#142E53;margin-bottom:.2rem}
+      .valiant-badge__panel span{display:block}
+      .valiant-badge__panel a{display:inline-block;margin-top:.45rem;color:#1A9D8F;font-weight:700;text-decoration:none}
+      .valiant-badge__panel a:hover{text-decoration:underline}
     </style>
   </div>
 </section>
