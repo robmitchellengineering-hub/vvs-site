@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Email to the CMIP International Project Office</title>
+<style>
+  :root { --navy:#142E53; --teal:#1A9D8F; --ink:#26333F; --muted:#5B6B7A; --line:#DDE7EE; --bg:#F5F8FA; }
+  *{box-sizing:border-box}
+  html,body{max-width:100%;overflow-x:hidden}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto;padding:20px 16px 48px}
+  .kicker{color:var(--teal);font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:800}
+  h1{color:var(--navy);font-size:21px;line-height:1.2;margin:6px 0 4px;letter-spacing:-.01em;overflow-wrap:anywhere}
+  p.lede{color:var(--muted);font-size:13px;margin:0 0 16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px}
+  pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;
+       font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.55;color:#1b2733;max-width:100%}
+  button{width:100%;border:0;border-radius:12px;background:var(--teal);color:#fff;font-weight:800;
+          font-size:16px;padding:15px 18px;letter-spacing:.01em}
+  button:active{opacity:.85}
+  button.secondary{background:#fff;color:var(--navy);border:1.5px solid var(--line);font-weight:700;font-size:13px;margin-top:8px}
+  .note{font-size:12px;color:var(--muted);margin:10px 2px 0;text-align:center;min-height:18px}
+  .links{margin-top:16px;font-size:13px;line-height:1.9}
+  .links a{color:var(--teal);text-decoration:none;font-weight:600}
+</style></head>
+<body><div class="wrap">
+  <div class="kicker">Valiant Verification Systems</div>
+  <h1>Email to the CMIP International Project Office</h1>
+  <p class="lede">Tap the button, then paste into your mail app. To, subject and signature are all inside.</p>
+
+  <button id="copy" type="button">Copy the whole email</button>
+  <div class="note" id="note"></div>
+
+  <div class="card" style="margin-top:16px">
+    <pre id="body">To: cmip26@wcrp-cmip.org
+Cc: cmip-ipo@esa.int
+Subject: A conservation gate for CMIP7 benchmarking: 19-model result, MIT code, four mutation proofs
+
+Twelve of the 19 CMIP6 models with published drift data leak energy in their pre-industrial
+control run - the worst by 1.485 W/m2, 1.93x the Earth&#x27;s energy imbalance. Salt, which never leaves
+the ocean, leaks in only 2 of 19, so the defect is in the air-sea coupling, not the ocean model.
+
+I have implemented this as a pass/fail benchmark rather than a diagnostic plot: energy, ocean mass
+and salt drift against fixed thresholds, crossed with ECS and ERF2x. On the 19 models it leaves one
+family (GISS-E2-1-G, ECS 2.71 K, zero ledgers leaked); the 53-model ensemble gates to 3.08 K, which
+brackets the verified number at [2.71, 3.08] K against AR6&#x27;s 2.5-4.0 K.
+
+The code is MIT, stdlib-only, and runs the whole check in under a second. Four mutations show each
+gate can fail. I am asking for one thing: an independent reviewer - my own conformance report passes
+five of its six checks and fails exactly that one, and I published it as a FAIL rather than hide it.
+
+Gate:   https://github.com/robmitchellengineering-hub/vds-spec/tree/main/benchmarks/climate-conservation
+Report: https://github.com/robmitchellengineering-hub/vds-spec/tree/main/conformance/reports/giss-e2-1-g
+Code:   https://github.com/robmitchellengineering-hub/pacland
+
+If this is better routed to the CMIP7 Model Benchmarking task team, or to whoever owns model evaluation, I would be grateful if you could forward it — or tell me who to write to directly.
+
+--
+Rob Mitchell
+Founder · Valiant Verification Systems
+Verification for complex systems — the verification deficit, the gate, and the certified reference.
+
+vvs.morpheus.nz · the standard: https://github.com/robmitchellengineering-hub/vds-spec
+info@valiantmusic.com.au
+
+VDS v0.9 · reports published with a hash anyone can recompute
+</pre>
+  </div>
+
+  <button class="secondary" id="select" type="button">Select all (if the copy button is blocked)</button>
+
+  <div class="links">
+    <a href="https://vvs.morpheus.nz/">vvs.morpheus.nz</a> ·
+    <a href="https://github.com/robmitchellengineering-hub/vds-spec/tree/main/benchmarks/climate-conservation">the gate</a> ·
+    <a href="https://github.com/robmitchellengineering-hub/vds-spec/tree/main/conformance/reports/giss-e2-1-g">the report</a>
+  </div>
+</div>
+<script>
+  const text = "To: cmip26@wcrp-cmip.org\nCc: cmip-ipo@esa.int\nSubject: A conservation gate for CMIP7 benchmarking: 19-model result, MIT code, four mutation proofs\n\nTwelve of the 19 CMIP6 models with published drift data leak energy in their pre-industrial\ncontrol run - the worst by 1.485 W/m2, 1.93x the Earth's energy imbalance. Salt, which never leaves\nthe ocean, leaks in only 2 of 19, so the defect is in the air-sea coupling, not the ocean model.\n\nI have implemented this as a pass/fail benchmark rather than a diagnostic plot: energy, ocean mass\nand salt drift against fixed thresholds, crossed with ECS and ERF2x. On the 19 models it leaves one\nfamily (GISS-E2-1-G, ECS 2.71 K, zero ledgers leaked); the 53-model ensemble gates to 3.08 K, which\nbrackets the verified number at [2.71, 3.08] K against AR6's 2.5-4.0 K.\n\nThe code is MIT, stdlib-only, and runs the whole check in under a second. Four mutations show each\ngate can fail. I am asking for one thing: an independent reviewer - my own conformance report passes\nfive of its six checks and fails exactly that one, and I published it as a FAIL rather than hide it.\n\nGate:   https://github.com/robmitchellengineering-hub/vds-spec/tree/main/benchmarks/climate-conservation\nReport: https://github.com/robmitchellengineering-hub/vds-spec/tree/main/conformance/reports/giss-e2-1-g\nCode:   https://github.com/robmitchellengineering-hub/pacland\n\nIf this is better routed to the CMIP7 Model Benchmarking task team, or to whoever owns model evaluation, I would be grateful if you could forward it \u2014 or tell me who to write to directly.\n\n--\nRob Mitchell\nFounder \u00b7 Valiant Verification Systems\nVerification for complex systems \u2014 the verification deficit, the gate, and the certified reference.\n\nvvs.morpheus.nz \u00b7 the standard: https://github.com/robmitchellengineering-hub/vds-spec\ninfo@valiantmusic.com.au\n\nVDS v0.9 \u00b7 reports published with a hash anyone can recompute\n";
+  const note = document.getElementById('note');
+  document.getElementById('copy').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      note.textContent = 'Copied — now paste it into your mail app.';
+    } catch (e) {
+      const r = document.createRange(); r.selectNodeContents(document.getElementById('body'));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      note.textContent = 'Selecting the email — press Copy, then paste it.';
+    }
+  });
+  document.getElementById('select').addEventListener('click', () => {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('body'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    note.textContent = 'Selected — press Copy, then paste it.';
+  });
+</script>
+</body></html>
