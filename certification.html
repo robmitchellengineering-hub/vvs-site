@@ -118,11 +118,12 @@
 <section id="registry" class="tight">
   <div class="wrap">
     <h2>The public registry</h2>
-    <p class="muted" style="max-width:820px">Every certified version is listed with its scope. The first entry is a <strong>self-certified reference</strong> — we ran our own suite — and is labelled as such; the first independent certification is a design-partner run.</p>
+    <p class="muted" style="max-width:820px">Every certified version is listed with its scope. An entry is a <strong>model</strong> (a verification deficit and a radius) or a <strong>system</strong> (gates, guards and a ledger — a build rig, a pipeline, a process); a system carries no deficit, because it makes claims rather than measurements. Both entries below are <strong>self-certified references</strong> — we ran our own suite — and are labelled as such; the first independent certification is a design-partner run.</p>
     <table style="margin-top:22px">
       <thead><tr><th>Product</th><th>Version</th><th>Level</th><th>Deficit</th><th>Gates</th><th>Auditor</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td><strong>pacland</strong></td><td>0.9</td><td>L3</td><td>m = 4 of 12</td><td>5/5 structural</td><td>VVS (self)</td><td>self-certified reference</td></tr>
+        <tr><td><strong>pacland</strong></td><td>0.9</td><td>L3</td><td>m = 4 of 12</td><td>3/3 · 6 guards proven</td><td>VVS (self)</td><td>self-certified reference</td></tr>
+        <tr><td><strong>harness-mesh</strong></td><td>v0.1</td><td>L3</td><td>not applicable — a system, not a model</td><td>12/12 · 12 guards proven</td><td>VVS (self)</td><td>self-certified reference</td></tr>
       </tbody>
     </table>
     <p class="note">The machine-readable registry is <a href="https://github.com/robmitchellengineering-hub/vds-spec/blob/main/registry.json" target="_blank" rel="noopener">registry.json in the standard repo</a> — every entry carries the hash of the report behind it, and the repo states how to recompute it. The first independent entry appears after a design-partner run.</p>
