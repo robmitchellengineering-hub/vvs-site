@@ -145,9 +145,9 @@
 <section id="proof">
   <div class="wrap">
     <div class="kicker" style="text-align:center">The proof</div>
-    <h2 style="text-align:center;max-width:820px;margin:0 auto 14px">Two fields, run end-to-end. Not slideware — published, reproducible work.</h2>
-    <p class="muted" style="text-align:center;max-width:760px;margin:0 auto 40px">The same verification spine applied to the hardest case (theoretical physics) and the most consequential one (climate). Both are in the open <a href="https://github.com/robmitchellengineering-hub/pacland" target="_blank" rel="noopener">pacland</a> project.</p>
-    <div class="grid g2">
+    <h2 style="text-align:center;max-width:820px;margin:0 auto 14px">Three fields, run end-to-end. Not slideware — published, reproducible work.</h2>
+    <p class="muted" style="text-align:center;max-width:760px;margin:0 auto 40px">The same verification spine applied to the hardest case (theoretical physics), the most consequential one (climate), and the one every organisation actually ships (software). Physics and climate live in the open <a href="https://github.com/robmitchellengineering-hub/pacland" target="_blank" rel="noopener">pacland</a> project; the software discipline is the open <a href="https://github.com/robmitchellengineering-hub/vds-spec" target="_blank" rel="noopener">VDS standard</a>.</p>
+    <div class="grid g3">
       <div class="card">
         <div class="tag">Physics</div>
         <h3>A theory of everything predicts relations, never values.</h3>
@@ -159,6 +159,13 @@
         <h3>Found 12 of 19 climate models leaking. Fixed them. The answer moved inside the observed range.</h3>
         <p class="muted">Twelve of 19 CMIP6 models fail conservation — the worst leaks at about <strong>2× the Earth's energy imbalance</strong>. The defect sits in the atmosphere–ocean coupling, so the field's own drift-correction removes it: <strong>19 of 19 conserve</strong> after the fix. Naive says <strong>3.78 K</strong> (hot-biased); the strict gate collapses to <strong>2.71 K</strong>; the repaired answer is <strong>3.08 K</strong> — inside the observed 2.6–3.9 K.</p>
         <p class="src"><a href="https://pacland.morpheus.nz/#climate" target="_blank" rel="noopener">Climate deficit →</a> · <a href="https://github.com/robmitchellengineering-hub/pacland/blob/main/docs/climate-verification-deficit.md" target="_blank" rel="noopener">deficit report</a> · <a href="https://github.com/robmitchellengineering-hub/pacland/blob/main/docs/climate-trust-board.md" target="_blank" rel="noopener">trust board</a> · <a href="https://github.com/robmitchellengineering-hub/pacland/blob/main/docs/climate-reference-model.md" target="_blank" rel="noopener">reference model</a> · <a href="https://github.com/robmitchellengineering-hub/pacland/blob/main/docs/climate-cmip6-drift.md" target="_blank" rel="noopener">drift guard</a> · <a href="https://github.com/robmitchellengineering-hub/pacland/blob/main/docs/climate-ace-report.md" target="_blank" rel="noopener">ACE report</a></p>
+      </div>
+      <div class="card">
+        <div class="tag">AI software</div>
+        <h3>&ldquo;Done&rdquo; is a check, not an assertion — and the checks are shown failing.</h3>
+        <p class="muted">The <strong>Valiant Verification SDK</strong> runs a project's own checks <em>by name</em>, then breaks the thing each guard protects and requires the guard to go red: a guard that cannot be shown to fail proves nothing, and a gate that is skipped, neutral or exits zero with no output is a <strong>fail</strong>, not a pass. Running in production on our own multi-machine build rig: <strong>7/7 gates</strong>, <strong>13 recorded hazards</strong> each naming its rule and the guard that now catches it, <strong>33/33 mutations caught</strong>. That is what a <strong>Certified</strong> mark is issued from — and it is refused, with the reason, when a single proof is missing.</p>
+        <p class="muted" style="margin-top:10px">It also enforces a team's <strong>own SOPs</strong>. A procedure becomes a named gate; a violation becomes a ledger entry that must name the guard which catches it — so a rule already broken once cannot be quietly broken again, and a &ldquo;we always do X&rdquo; that nobody checks shows up as a gap rather than a habit.</p>
+        <p class="src"><a href="https://github.com/robmitchellengineering-hub/vds-spec" target="_blank" rel="noopener">The standard</a> · <a href="https://github.com/robmitchellengineering-hub/vds-spec/tree/main/conformance" target="_blank" rel="noopener">conformance suite</a> · <a href="https://github.com/robmitchellengineering-hub/vds-spec/blob/main/registry.json" target="_blank" rel="noopener">registry</a> · <a href="https://github.com/robmitchellengineering-hub/vds-spec/tree/main/conformance/reports" target="_blank" rel="noopener">a published report</a> · <a href="https://github.com/robmitchellengineering-hub/pacland/blob/main/valiant.json" target="_blank" rel="noopener">live adoption</a></p>
       </div>
     </div>
   </div>
