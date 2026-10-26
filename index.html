@@ -163,7 +163,7 @@
       <div class="card">
         <div class="tag">AI software</div>
         <h3>&ldquo;Done&rdquo; is a check, not an assertion — and the checks are shown failing.</h3>
-        <p class="muted">The <strong>Valiant Verification SDK</strong> runs a project's own checks <em>by name</em>, then breaks the thing each guard protects and requires the guard to go red: a guard that cannot be shown to fail proves nothing, and a gate that is skipped, neutral or exits zero with no output is a <strong>fail</strong>, not a pass. Running in production on our own multi-machine build rig: <strong>7/7 gates</strong>, <strong>13 recorded hazards</strong> each naming its rule and the guard that now catches it, <strong>33/33 mutations caught</strong>. That is what a <strong>Certified</strong> mark is issued from — and it is refused, with the reason, when a single proof is missing.</p>
+        <p class="muted">The <strong>Valiant Verification SDK</strong> runs a project's own checks <em>by name</em>, then breaks the thing each guard protects and requires the guard to go red: a guard that cannot be shown to fail proves nothing, and a gate that is skipped, neutral or exits zero with no output is a <strong>fail</strong>, not a pass. Across the adoptions it runs now: <strong>130 guard scripts and 503 mutation proofs</strong> on the Morpheus codebase, and on our own multi-machine build rig <strong>12/12 gates</strong>, <strong>13 recorded hazards</strong> each naming its rule and the guard that now catches it, <strong>33/33 mutations caught</strong>. That is what a <strong>Certified</strong> mark is issued from — and it is refused, with the reason, when a single proof is missing.</p>
         <p class="muted" style="margin-top:10px">It also enforces a team's <strong>own SOPs</strong>. A procedure becomes a named gate; a violation becomes a ledger entry that must name the guard which catches it — so a rule already broken once cannot be quietly broken again, and a &ldquo;we always do X&rdquo; that nobody checks shows up as a gap rather than a habit.</p>
         <p class="src"><a href="https://github.com/robmitchellengineering-hub/vds-spec" target="_blank" rel="noopener">The standard</a> · <a href="https://github.com/robmitchellengineering-hub/vds-spec/tree/main/conformance" target="_blank" rel="noopener">conformance suite</a> · <a href="https://github.com/robmitchellengineering-hub/vds-spec/blob/main/registry.json" target="_blank" rel="noopener">registry</a> · <a href="https://github.com/robmitchellengineering-hub/vds-spec/tree/main/conformance/reports" target="_blank" rel="noopener">a published report</a> · <a href="https://github.com/robmitchellengineering-hub/pacland/blob/main/valiant.json" target="_blank" rel="noopener">live adoption</a></p>
       </div>
@@ -260,8 +260,8 @@
         <tr>
           <td><strong>Model selection</strong></td>
           <td class="warn">average all 53 CMIP6 models</td>
-          <td class="good">14 trusted, each exclusion named</td>
-          <td class="warn">39 untrustworthy models excluded — and *why*</td>
+          <td class="good">15 trusted, each exclusion named</td>
+          <td class="warn">38 models excluded — and <em>why</em></td>
         </tr>
         <tr>
           <td><strong>Physics research direction</strong></td>
