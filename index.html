@@ -323,7 +323,7 @@ function vvsBuy(pkg){
   if (pkg === 'sdk'){ seats = Number(prompt('How many developers?', '1')); if (!seats || seats < 1) return; }
   const qs = 'package=' + encodeURIComponent(pkg)
     + '&seats=' + seats
-    + '&successUrl=' + encodeURIComponent(location.origin + '/?subscribed=1&session_id={CHECKOUT_SESSION_ID}')
+    + '&successUrl=' + encodeURIComponent(location.origin + '/claim?session_id={CHECKOUT_SESSION_ID}')
     + '&cancelUrl=' + encodeURIComponent(location.origin + '/');
   location.href = 'https://api.morpheus.nz/api/functions/createCertificationCheckout?' + qs;
 }
