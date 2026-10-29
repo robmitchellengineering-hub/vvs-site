@@ -57,13 +57,14 @@ li{margin:4px 0}
 <p>One page, end to end. Every step names the code that implements it, so a sentence here can be checked against the product rather than believed.</p>
 <p>The shape in one line: <strong>a monthly subscription mints a short-lived signed licence; the licence is what the tool checks, offline; when payments stop, nothing is minted and the tool refuses.</strong></p>
 <hr>
-<h2>0. What a licence covers — one machine, and one CI runner</h2>
-<p>A <strong>seat is a machine.</strong> One seat is one developer's machine, and <strong>every licence also covers one CI runner</strong>, so a solo buyer's own pipeline can run <code>valiant gate</code> without buying a second seat. Rob, 2026-11-02: *"a single licence should allow you to build with vvs qa"*.</p>
+<h2>0. What a licence covers — one machine and one CI runner, per seat</h2>
+<p>A <strong>seat is a machine and a runner.</strong> Every seat covers one developer machine *and* one CI runner, so a solo buyer's pipeline can run <code>valiant gate</code> without a second seat, and a team that bought five seats gets five of each. Rob, 2026-11-02: *"a single licence should allow you to build with vvs qa"* and then *"if you buy 5 seats thats 5 CI runners"*.</p>
 <div class="table-scroll"><table>
-<tr><th></th><th>per seat</th><th>included</th></tr>
-<tr><td>developer machine</td><td>1</td><td>—</td></tr>
-<tr><td>CI runner</td><td>—</td><td><strong>1</strong></td></tr>
+<tr><th>seats bought</th><th>machines</th><th>CI runners</th></tr>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>5</td><td>5</td><td><strong>5</strong></td></tr>
 </table></div>
+<p>The allowance is stated in the licence as a <code>runners</code> claim, so a buyer can see what they got without reading code.</p>
 <p>A runner is recognised by the environment CI sets (<code>GITHUB_ACTIONS</code>, <code>GITLAB_CI</code>, <code>CIRCLECI</code>, <code>BUILDKITE</code>, <code>JENKINS_URL</code>, <code>TF_BUILD</code>, and plain <code>CI=true</code> last). Anything unclear counts as a machine, because guessing "runner" would hand out free seats. You should see both counts on one line when a licence is in use:</p>
 <pre><code>
 valiant licence --list
