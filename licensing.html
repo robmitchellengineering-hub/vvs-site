@@ -57,6 +57,21 @@ li{margin:4px 0}
 <p>One page, end to end. Every step names the code that implements it, so a sentence here can be checked against the product rather than believed.</p>
 <p>The shape in one line: <strong>a monthly subscription mints a short-lived signed licence; the licence is what the tool checks, offline; when payments stop, nothing is minted and the tool refuses.</strong></p>
 <hr>
+<h2>0. What a licence covers — one machine, and one CI runner</h2>
+<p>A <strong>seat is a machine.</strong> One seat is one developer's machine, and <strong>every licence also covers one CI runner</strong>, so a solo buyer's own pipeline can run <code>valiant gate</code> without buying a second seat. Rob, 2026-11-02: *"a single licence should allow you to build with vvs qa"*.</p>
+<div class="table-scroll"><table>
+<tr><th></th><th>per seat</th><th>included</th></tr>
+<tr><td>developer machine</td><td>1</td><td>—</td></tr>
+<tr><td>CI runner</td><td>—</td><td><strong>1</strong></td></tr>
+</table></div>
+<p>A runner is recognised by the environment CI sets (<code>GITHUB_ACTIONS</code>, <code>GITLAB_CI</code>, <code>CIRCLECI</code>, <code>BUILDKITE</code>, <code>JENKINS_URL</code>, <code>TF_BUILD</code>, and plain <code>CI=true</code> last). Anything unclear counts as a machine, because guessing "runner" would hand out free seats. You should see both counts on one line when a licence is in use:</p>
+<pre><code>
+valiant licence --list
+</code></pre>
+<pre><code>
+account    plan   machines  used  runners  used  expires      status
+cus_solo12 solo   1         1     1        1     2026-11-28   valid
+</code></pre>
 <h2>1. You pay</h2>
 <p>Stripe, per seat. The packages are defined in <code>PACKAGES</code> in morpheus <code>server/src/functions/createCertificationCheckout.js</code>:</p>
 <div class="table-scroll"><table>
