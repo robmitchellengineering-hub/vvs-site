@@ -152,6 +152,15 @@ mint-revocations: 2 id(s), signed with vvs-2026-10, valid until 2027-01-27
 <p>It is published, and this is the URL to hand a customer:</p>
 <p>https://vvs.morpheus.nz/revocations.vvs</p>
 <p>Measured end to end on 2026-10-30: a machine with an empty list ran <code>valiant licence --sync https://vvs.morpheus.nz/revocations.vvs</code> and held the revoked id afterwards. Nothing at the customer's end needs updating — it verifies with the SDK they already installed.</p>
+<p><strong>A revocation is recorded in the admin page and published from this Mac, so the two are kept in step by pulling.</strong> The server is remote and cannot write here, so the Mac reads what the database records:</p>
+<pre><code>
+tools/pull-revocations.sh   # on the Mac: merge the ids the database marks revoked
+</code></pre>
+<p>You should see the count of new ids and the total held:</p>
+<pre><code>
+pull-revocations: +2 new, 3 id(s) held — 2 of them new to this machine
+</code></pre>
+<p>It only ever <strong>adds</strong>: a list that can shrink is a list that can resurrect a revoked licence. If the database cannot be read it exits 2 and changes nothing, because an empty list looks exactly like "nothing is revoked". The scheduled run does pull-then-publish, so revoking someone in the admin page reaches the published list without anything being copied by hand.</p>
 <p><strong>The cadence is the control, because the list expires.</strong> One command re-mints and publishes it:</p>
 <p>You should see the count, the term, and the live URL at the end:</p>
 <pre><code>
