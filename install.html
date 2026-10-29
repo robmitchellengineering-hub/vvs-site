@@ -119,7 +119,7 @@
 
     <div class="card">
       <h2 style="font-size:22px;margin:0 0 8px">1 · What you need</h2>
-      <p class="muted">Node 18 or newer, and a licence file from your issuer — a 264-byte signed token beginning <code>vvs1…</code>. Without one, <code>valiant gate</code> refuses by design: it will not call a repository fine unless it is licensed to look. Nothing else is downloaded, at install time or at run time.</p>
+      <p class="muted">Node 18 or newer, and a licence file from your issuer — a signed token beginning <code>vvs1…</code> (a few hundred bytes — it grows only when the issuer includes a revocation list). Without one, <code>valiant gate</code> refuses by design: it will not call a repository fine unless it is licensed to look. Nothing else is downloaded, at install time or at run time.</p>
     </div>
 
     <div class="card" style="margin-top:16px">
@@ -128,7 +128,13 @@
 valiant --help
 
 valiant licence --file ./acme.licence   # install it, once per machine
-valiant licence --status               # what this machine holds: plan, seats, expiry</code></pre>
+valiant licence --status               # what this machine holds: plan, seats, expiry
+valiant licence --sync https://vvs.morpheus.nz/revocations.vvs   # pick up the revocation list, now</code></pre>
+      <p class="muted">A licence is <strong>monthly</strong> — 30 days, the billing period — and renews while the subscription is paid. A
+      <strong>failed payment mints a 7-day grace licence</strong>, so a declined card does not stop your work the same day. If a
+      licence is <strong>revoked</strong>, it keeps working for 48 hours with a warning on every run, then stops: a wrong
+      revocation is not meant to become your outage. The last line above is optional — the list also travels inside your next
+      renewal — it is there for the day you need it immediately.</p>
       <p class="note" style="margin-bottom:0">The SDK is not on npm — you get a tarball from your issuer, with a <code>.sha256</code> beside it. Ask for it with the licence: <a href="mailto:info@valiantmusic.com.au?subject=Valiant%20SDK%20tarball">request the tarball</a>.</p>
     </div>
 
@@ -181,6 +187,8 @@ valiant gate      # the verdict</code></pre>
       <tr><td>init: I found no check to gate on</td><td>no test command was found — the message lists every place it looked</td></tr>
       <tr><td>gate needs a licence on this machine</td><td><code>valiant licence --file &lt;path&gt;</code></td></tr>
       <tr><td>licence expired …</td><td>the subscription lapsed; renew it</td></tr>
+      <tr><td>this licence (…) has been REVOKED. It keeps working for N more hour(s)</td><td>it still works for 48 hours; contact your issuer, because after that every gate stops</td></tr>
+      <tr><td>the grace has run out</td><td>the 48 hours passed — your issuer has withdrawn this licence</td></tr>
       <tr><td>guard PASSED with the sabotage applied</td><td>the check does not read the file you are breaking</td></tr>
       <tr><td>find matches 2 times</td><td>make the <code>find</code> string unique</td></tr>
       <tr><td>gate: a contract could not be checked</td><td>a gate exited 2 or did not run; the line above names it</td></tr>
