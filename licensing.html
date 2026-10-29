@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Licensing — from the payment to a working install — Valiant Verification Systems</title>
+<meta name="description" content="How a Valiant licence works: purchase, install, renewal, the 7-day grace when a payment fails, and what a revocation does. Rendered from the document that ships inside the SDK.">
+<style>
+:root{--ink:#0b2440;--muted:#5b6b7c;--teal:#0f7d7d;--paper:#fff;--wash:#f4f7fa;--line:#dfe6ed}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+a{color:var(--teal)}
+header{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+nav{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.06em;font-size:13px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px}
+.brand img{width:26px;height:26px}
+nav .links{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:14px}
+nav .links a{text-decoration:none;color:var(--muted)}
+main{max-width:820px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:34px;line-height:1.2;margin:0 0 8px}
+h2{font-size:22px;margin:38px 0 10px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:24px 0 8px;color:var(--muted)}
+p{margin:0 0 14px}
+code{background:var(--wash);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13.5px;
+  overflow-wrap:anywhere;word-break:break-word}
+/* A long path in inline code forced the page to 450px on a 390px phone — measured, not guessed. */
+pre{background:#0d1b2a;color:#dbe7f3;border-radius:10px;padding:16px 18px;overflow-x:auto}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:13px;line-height:1.6}
+.table-scroll{overflow-x:auto;margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--wash);font-weight:600}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:4px 0}
+.muted{color:var(--muted)}
+/* A phone clipped the right-hand side of long command lines. On a narrow screen the commands wrap instead: a doc you read on
+   a phone should not hide the part of the command that matters. */
+@media (max-width:520px){ pre code{white-space:pre-wrap;overflow-wrap:anywhere} }
+</style>
+</head>
+<body>
+<header><nav>
+  <a class="brand" href="index.html"><img src="assets/badge.png" alt="">VALIANT VERIFICATION SYSTEMS</a>
+  <div class="links">
+    <a href="index.html#who">Who we are</a>
+    <a href="index.html#proof">The proof</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="spec.html">Spec</a>
+    <a href="certification.html">Certification</a>
+    <a href="install.html">Install</a>
+    <a href="licensing.html" style="color:var(--teal);opacity:1">Licensing</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav></header>
+<main>
+<h1>Licensing — from the payment to a working install</h1>
+<p>One page, end to end. Every step names the code that implements it, so a sentence here can be checked against the product rather than believed.</p>
+<p>The shape in one line: <strong>a monthly subscription mints a short-lived signed licence; the licence is what the tool checks, offline; when payments stop, nothing is minted and the tool refuses.</strong></p>
+<hr>
+<h2>1. You pay</h2>
+<p>Stripe, per seat. The packages are defined in <code>PACKAGES</code> in morpheus <code>server/src/functions/createCertificationCheckout.js</code>:</p>
+<div class="table-scroll"><table>
+<tr><th>package</th><th>price</th><th>per seat</th><th>what it is</th></tr>
+<tr><td><code>sdk</code></td><td>$25 / developer / month</td><td><strong>yes</strong></td><td>the SDK, standard</td></tr>
+<tr><td><code>sdk_ent</code></td><td>$49 / developer / month</td><td><strong>yes</strong></td><td>same software; SSO, priority support, an SLA</td></tr>
+<tr><td><code>corpus</code></td><td>$500 / month</td><td>no (flat)</td><td>the guard + hazard + method feed</td></tr>
+<tr><td><code>corpus_ent</code></td><td>$1,500 / month</td><td>no (flat)</td><td>adds regulatory mappings, priority ingestion, badge audit</td></tr>
+</table></div>
+<p><strong>Per seat means per seat.</strong> One licence covers the number of seats bought, and a seat is a <strong>machine</strong>: a laptop, a desktop, and a CI runner are three seats. That is the rule, not a nuance — plan for it before a team installs.</p>
+<h2>2. The licence is minted</h2>
+<pre><code>
+invoice.paid / invoice.payment_succeeded
+   → morpheus /api/functions/stripeWebhook   (Stripe signature verified against the raw body)
+   → mints a 30-day licence (the billing period), seats taken from the Stripe quantity
+   → mails it to the Stripe customer as lic_abc123.licence
+</code></pre>
+<p>You should see the email arrive within a minute of the payment, with a <code>.licence</code> attachment whose filename starts <code>lic_</code>.</p>
+<p>The signing is identical to this repo's own tool (<code>src/stripe-renew.mjs</code>), and morpheus runs <code>scripts/verify-valiant-licence.mjs</code>, which asserts that <strong>the SDK's own verifier accepts what morpheus signs</strong> — so the two implementations cannot drift apart silently.</p>
+<h2>3. You install</h2>
+<p>You need two things: the <strong>tarball</strong> and the <strong>licence file</strong>.</p>
+<pre><code>
+npm install -g ./valiant-verification-sdk-0.2.0.tgz
+valiant licence --file ./lic_abc123.licence
+valiant licence --status
+</code></pre>
+<p>You should see the plan, the seat count and the expiry date. The licence is stored at <code>~/.valiant/licence</code> (mode 600) and is checked <strong>offline</strong> — no account, no network call, nothing to log in to.</p>
+<p>Then, in the repository you want verified:</p>
+<pre><code>
+valiant setup
+</code></pre>
+<p>You should see four numbered steps ending in <code>gate: every contract holds</code>.</p>
+<h2>4. It renews while you pay</h2>
+<p>Every monthly payment mints a <strong>new 30-day licence</strong> and mails it — the licence lasts exactly as long as the period that was paid for. Replacing it is one command:</p>
+<pre><code>
+valiant licence --file ./lic_9f2c4a.licence
+</code></pre>
+<p>You should see the new expiry date, thirty days later than the last one.</p>
+<p>Nothing else changes: your config, your proofs and your guards are untouched by a renewal.</p>
+<h2>5. When a payment fails — 7 days of grace, then it stops</h2>
+<p>A <strong>failed payment is not an instant cut-off</strong>. <code>invoice.payment_failed</code> mints a <strong>7-day grace licence</strong>, labelled <code>grace: true</code> in its claims, so support can tell "we granted you a week" from "you paid". A declined card has that week to be fixed; when the grace runs out, nothing more is minted:</p>
+<p>You should see that grace licence arrive by email within a minute of the failure; <code>valiant licence --status</code> shows an expiry seven days out:</p>
+<pre><code>
+invoice.payment_failed  → mints a 7-day grace licence (grace: true)
+                       → after that: nothing
+</code></pre>
+<p><code>customer.subscription.paused</code> and <code>customer.subscription.deleted</code> mint <strong>nothing at all</strong> — the last licence runs out when it expires, and then:</p>
+<pre><code>
+valiant gate
+</code></pre>
+<p>You should see <code>valiant: this machine's licence is not valid: licence expired 2 day(s) ago</code> and exit <strong>2</strong> — a contract that could not be checked.</p>
+<p>That is the whole enforcement: <strong>time, not a phone-home.</strong> A machine that has gone quiet still stops, because its licence has an expiry date in it. Exit 2 is red: a build that cannot check is not a build that passed.</p>
+<h2>6. Revocation — loud first, then blocked</h2>
+<p>Rob, 2026-10-30: *"Block after grace."* A <code>jti</code> listed in <code>~/.valiant/revoked.txt</code> is not refused the instant it appears:</p>
+<div class="table-scroll"><table>
+<tr><th></th><th></th></tr>
+<tr><td><strong>first 48 hours</strong></td><td>the gate <strong>runs</strong>, and every run prints one warning naming the hours left and the deadline</td></tr>
+<tr><td><strong>after 48 hours</strong></td><td><code>gate</code> exits <strong>2</strong> — *"was REVOKED on &lt;date&gt; and the grace has run out"*</td></tr>
+</table></div>
+<p>The reason for the middle phase is asymmetric risk: a revocation can be <strong>wrong</strong> — the wrong account, a key rotation, a licence copied to an old laptop — and cutting a paying customer off instantly turns our mistake into their outage. A leaked licence surviving two days is the smaller harm.</p>
+<p>The clock starts when this machine <strong>first sees</strong> the id (recorded in <code>~/.valiant/revocations-seen.json</code>), not when the licence was issued: otherwise grace would be either eternal or already used up.</p>
+<p>You should see, on the first run after the list arrives:</p>
+<pre><code>
+valiant: WARNING — this licence (lic_9f2c41) has been REVOKED. It keeps working for 48 more hour(s), until
+2026-11-01T09:00:00.000Z, so a wrong revocation is not an outage — after that every gate stops.
+</code></pre>
+<h3>How the list reaches a machine</h3>
+<p>Two carriers, both offline-safe — neither needs the SDK to call a server on every run:</p>
+<ol>
+<li><strong>It travels with the licence.</strong> A renewal can carry <code>revocations: [jti…]</code> as a signed claim. When a licence verifies,</li>
+<p>   the gate absorbs that list into <code>~/.valiant/revoked.txt</code>. So the email a customer already receives is also the    revocation update, and no endpoint has to exist.</p>
+<li><strong><code>--sync</code> for immediate action.</strong></li>
+</ol>
+<pre><code>
+valiant licence --sync https://example.com/revocations.vvs
+valiant licence --sync /path/to/revocations.vvs
+</code></pre>
+<p>You should see the count and the list's date, and the command exits 0:</p>
+<pre><code>
+licence --sync: +2 new, 2 revoked id(s) held · list issued 2026-10-29 (file)
+</code></pre>
+<p>A list is the <strong>second token type</strong> in the same signed envelope (<code>kind: "revocations"</code>), so it is checked as strictly as a licence — version, expiry, signature, a real array — and a licence cannot be passed off as one. Two refusals are deliberate: an <strong>edited</strong> list fails its signature, and an <strong>older</strong> list is refused rather than merged, because a rollback would resurrect a revoked licence. A list more than 30 days old prints a warning instead of pretending to be current.</p>
+<h3>Publishing the list</h3>
+<p>The issuer mints one file and puts it anywhere a customer can fetch it. It is <strong>public</strong> — it names withdrawn ids and nothing else — and it is signed, because an unsigned list is a wish: anyone could hand a customer a list bearing the customer's own id.</p>
+<pre><code>
+node tools/mint-revocations.mjs --out revocations.vvs --from ~/.valiant/revoked.txt  # on the Mac, the issuing machine
+node tools/mint-revocations.mjs --out revocations.vvs --jti lic_a --jti lic_b --days 90  # on the Mac
+</code></pre>
+<p>You should see the count, the key that signed it, and its expiry:</p>
+<pre><code>
+mint-revocations: 2 id(s), signed with vvs-2026-10, valid until 2027-01-27
+</code></pre>
+<p>It is published, and this is the URL to hand a customer:</p>
+<p>https://vvs.morpheus.nz/revocations.vvs</p>
+<p>Measured end to end on 2026-10-30: a machine with an empty list ran <code>valiant licence --sync https://vvs.morpheus.nz/revocations.vvs</code> and held the revoked id afterwards. Nothing at the customer's end needs updating — it verifies with the SDK they already installed.</p>
+<p><strong>The cadence is the control, because the list expires.</strong> One command re-mints and publishes it:</p>
+<p>You should see the count, the term, and the live URL at the end:</p>
+<pre><code>
+tools/publish-revocations.sh            # on the Mac: mint, commit to the public site, merge
+tools/publish-revocations.sh --dry-run  # mint and stop; publish nothing
+</code></pre>
+<p>Run it <strong>whenever something is revoked</strong> and <strong>on a schedule</strong> (weekly is enough for a 90-day term) — a list that is never re-minted is a list that silently goes stale. On this Mac it is scheduled: a launchd agent (<code>nz.morpheus.valiant.revocations</code>) runs it Mondays at 09:15, because the issuer key never leaves this machine and a node cannot sign a list without it.</p>
+<p><strong>It refuses to publish anything but the issuer's own list.</strong> <code>~/.valiant/revoked.txt</code> is the only source it accepts; any other file — including a symlink planted at that path — stops it with exit 2, because a publish script pointed at a test file is pointed at production. When you do mean another source, say so explicitly and it prints the override:</p>
+<pre><code>
+tools/publish-revocations.sh --allow-other-source --from /path/to/other-list.txt
+</code></pre>
+<p><strong>The limit, stated plainly:</strong> the list is <strong>per machine</strong>. A revocation reaches only machines that have been given the file, and the grace above is per machine too. For a customer on the other side of the planet, <strong>expiry is the control you can rely on</strong> — a monthly licence that stops being renewed stops working within a month, with no network call and no list to deliver.</p>
+<h2>7. Operator runbook — "my licence expired"</h2>
+<ol>
+<li>Is the subscription <code>active</code> and paid in Stripe? If yes → the next <code>invoice.paid</code> re-mints; or mint by hand:</li>
+<p>   <code>node tools/mint-licence.mjs --account &lt;id&gt; --plan team --seats 3 --days 7 --out acme.licence</code>.</p>
+<li>If it is not paid, the answer is payment, not a licence. Saying otherwise is how a support relationship starts badly.</li>
+<li>If the licence is present and current but refused: <code>valiant licence --status</code> names the reason — expired, revoked, seat</li>
+<p>   count exceeded, or a <code>kid</code> this build does not carry (that last one means the tool is older than the signing key).</p>
+</ol>
+<h2>8. Customer runbook — "it stopped working"</h2>
+<div class="table-scroll"><table>
+<tr><th>what you see</th><th>what it is</th><th>what to do</th></tr>
+<tr><td><code>licence expired N day(s) ago</code>, exit 2</td><td>payment lapsed a week ago</td><td>renew, then <code>valiant licence --file &lt;new&gt;</code></td></tr>
+<tr><td><code>licence … has been revoked</code></td><td>the issuer revoked that <code>jti</code></td><td>ask for a new licence; do not edit the file</td></tr>
+<tr><td><code>already used on N machine(s)</code></td><td>seats are per machine and you are over</td><td>buy a seat, or release one by removing its entry from <code>~/.valiant/seats.json</code></td></tr>
+<tr><td><code>this build has several signing keys but the licence names no key id</code></td><td>the licence predates a key rotation</td><td>update the tool, or ask for a re-minted licence</td></tr>
+<tr><td>exit 0, <code>gate: every contract holds</code></td><td>working</td><td>nothing</td></tr>
+</table></div>
+<h2>8a. Enforcement — where the gate actually stops something</h2>
+<p>A tool an agent may ignore is documentation. <code>valiant enforce --status</code> prints this table, and the installs make each row true:</p>
+<div class="table-scroll"><table>
+<tr><th>where</th><th>what stops</th><th>command</th></tr>
+<tr><td><code>git push</code></td><td>a red gate cannot leave the machine</td><td><code>valiant hooks --install</code></td></tr>
+<tr><td>CI (GitHub, Jenkins, GitLab)</td><td>a red gate fails the job</td><td><code>valiant ci-init &lt;platform&gt;</code></td></tr>
+<tr><td><strong>Claude Code</strong></td><td>the agent cannot finish a turn while the gate is red — a <code>Stop</code> hook exits 2 and hands it the reason</td><td><code>valiant enforce --install claude</code></td></tr>
+<tr><td><strong>DSH</strong></td><td>the harness runs the gate before a completion-shaped command</td><td><code>valiant enforce --install dsh</code></td></tr>
+</table></div>
+<p><code>valiant mcp</code> is the consultative half: it lets an agent *ask* for the verdict. The hook is the enforcement half: it runs when the agent tries to finish. Both are needed — the tool for an agent that cooperates, the hook for one that does not.</p>
+<h2>9. What this deliberately is not</h2>
+<ul>
+<li><strong>No phone-home.</strong> Verification never contacts us. A licence is a signed file with an expiry date.</li>
+<li><strong>No seat telemetry.</strong> Seat counting is local (<code>~/.valiant/seats.json</code>) — it stops accidents, not intent. A customer who</li>
+<p>  edits the file is not detected; that is a decision, not an oversight, and it is why the price is per developer rather   than per installation.</p>
+<li><strong>No account to log into</strong> for the SDK itself. The licence page on the web is for issuing and revoking, not for running</li>
+<p>  the tool.</p>
+</ul>
+</main>
+</body>
+</html>
