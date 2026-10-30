@@ -124,7 +124,8 @@
 
     <div class="card" style="margin-top:16px">
       <h2 style="font-size:22px;margin:0 0 8px">2 · Install</h2>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>npm install -g ./valiant-verification-sdk-0.2.0.tgz
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code># install straight from our registry — nothing to ask for
+npm install -g "https://api.morpheus.nz/api/functions/getPackage?name=valiant-verification-sdk&amp;version=latest"
 valiant --help
 
 valiant licence --file ./acme.licence   # install it, once per machine
@@ -135,7 +136,7 @@ valiant licence --sync https://vvs.morpheus.nz/revocations.vvs   # pick up the r
       licence is <strong>revoked</strong>, it keeps working for 48 hours with a warning on every run, then stops: a wrong
       revocation is not meant to become your outage. The last line above is optional — the list also travels inside your next
       renewal — it is there for the day you need it immediately.</p>
-      <p class="note" style="margin-bottom:0">The SDK is not on npm — you get a tarball from your issuer, with a <code>.sha256</code> beside it. Ask for it with the licence: <a href="mailto:info@valiantmusic.com.au?subject=Valiant%20SDK%20tarball">request the tarball</a>.</p>
+      <p class="note" style="margin-bottom:0">The SDK is <strong>not on npm</strong>, deliberately — no third-party registry to depend on or be taken over. Distribution is our own registry, and the command above pulls the current build with its checksum. If you would rather have a file: <a href="downloads/">pinned builds with their <code>.sha256</code></a>, and <a href="downloads/index.json">the index</a> says which version is current.</p>
     </div>
 
     <div class="card" style="margin-top:16px">
