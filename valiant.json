@@ -1,0 +1,55 @@
+{
+  "gates": [
+    {
+      "name": "status-current",
+      "cmd": [
+        "node",
+        "scripts/status-truth.mjs"
+      ]
+    },
+    {
+      "name": "downloads-current",
+      "cmd": [
+        "node",
+        "scripts/downloads-truth.mjs"
+      ]
+    },
+    {
+      "name": "feed-current",
+      "cmd": [
+        "node",
+        "scripts/feed-truth.mjs"
+      ]
+    },
+    {
+      "name": "adoptions-current",
+      "cmd": [
+        "node",
+        "scripts/adoptions-truth.mjs"
+      ],
+      "subject": "index.html",
+      "sabotage": {
+        "find": "<strong>211 guard scripts and 514 mutation proofs</strong>",
+        "replace": "<strong>133 guard scripts and 514 mutation proofs</strong>",
+        "why": "the page states a number the measurement does not back"
+      }
+    }
+  ],
+  "ledger": false,
+  "guards": [
+    {
+      "invariant": 27,
+      "backs": "a published number is evidence that must be recomputed against reality, never transcribed once",
+      "name": "status-number-is-a-claim",
+      "file": "index.html",
+      "find": "<strong>43 universal invariants</strong>",
+      "replace": "<strong>99 universal invariants</strong>",
+      "check": [
+        "node",
+        "scripts/status-truth.mjs",
+        "--sdk",
+        "/Users/mac/code/valiant-verification-sdk"
+      ]
+    }
+  ]
+}

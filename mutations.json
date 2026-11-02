@@ -1,0 +1,38 @@
+{
+  "note": "Written by `valiant mutate` — one row per guard, with the verdict the check actually produced. result red means the check went red when the thing it protects was broken.",
+  "writtenBy": "valiant mutate",
+  "commit": "6248608b877821ed6559ed603260605867ef81f7",
+  "at": "2026-11-02T20:21:34.850Z",
+  "red": 2,
+  "proofs": [
+    {
+      "guard": "status-number-is-a-claim",
+      "file": "index.html",
+      "site": "843adf5a3111",
+      "verdict": "caught",
+      "find": "<strong>43 universal invariants</strong>",
+      "replace": "<strong>99 universal invariants</strong>",
+      "check": [
+        "node",
+        "scripts/status-truth.mjs",
+        "--sdk",
+        "/Users/mac/code/valiant-verification-sdk"
+      ],
+      "result": "red"
+    },
+    {
+      "kind": "gate",
+      "guard": "adoptions-current",
+      "name": "adoptions-current",
+      "result": "red",
+      "file": "index.html",
+      "find": "<strong>211 guard scripts and 514 mutation proofs</strong>",
+      "replace": "<strong>133 guard scripts and 514 mutation proofs</strong>",
+      "check": [
+        "node",
+        "scripts/adoptions-truth.mjs"
+      ],
+      "detail": "exit 1 with index.html sabotaged"
+    }
+  ]
+}
