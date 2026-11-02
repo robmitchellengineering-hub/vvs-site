@@ -13,6 +13,13 @@
         "node",
         "scripts/downloads-truth.mjs"
       ]
+    },
+    {
+      "name": "feed-current",
+      "cmd": [
+        "node",
+        "scripts/feed-truth.mjs"
+      ]
     }
   ],
   "ledger": false,
