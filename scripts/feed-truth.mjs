@@ -37,8 +37,11 @@ if (ok.corpus.method.length !== truth.methodRules) problems.push(`the feed carri
 const ageDays = Math.floor((Date.now() - Date.parse(ok.version)) / 86400000);
 if (!Number.isFinite(ageDays)) problems.push(`the feed's version "${ok.version}" is not a date, so its age cannot be judged`);
 else if (ageDays > MAX_AGE_DAYS) problems.push(`the feed is ${ageDays} days old — it stopped growing, which is the one thing it exists to do`);
-const retired = ok.corpus.kid !== 'vvs-2026-11';
-if (retired) problems.push(`the feed is signed with ${ok.corpus.kid}, which is retired — re-sign it: valiant corpus --publish --out corpus/current.txt`);
+// THE SDK DECLARES which kids are retired; the site does not decide for itself. A hardcoded "must be vvs-2026-11" would rot the same way the
+// hardcoded number did.
+let retiredKids = [];
+try { retiredKids = JSON.parse(readFileSync(join(keysDir, '..', 'licence-keys', 'status.json'), 'utf8')).retired ?? []; } catch { retiredKids = []; }
+if (retiredKids.includes(ok.corpus.kid)) problems.push(`the feed is signed with ${ok.corpus.kid}, which the SDK declares RETIRED — re-sign it: valiant corpus --publish --out corpus/current.txt`);
 
 if (problems.length) { for (const p of problems) console.error(`  FAIL  ${p}`); process.exit(1); }
 console.log(`feed-truth: the feed verifies (kid ${ok.corpus.kid}, ${ok.version}, ${ageDays}d old) and carries the corpus the SDK ships`);

@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-02",
+  "repos": [
+    {
+      "label": "morpheus",
+      "proofs": 514,
+      "files": 211,
+      "gates": 2,
+      "hazards": 26,
+      "commit": "076620e",
+      "measuredFrom": "/Users/mac/code/morpheus-self-hosted"
+    },
+    {
+      "label": "rig",
+      "proofs": 35,
+      "files": 13,
+      "gates": 17,
+      "hazards": 23,
+      "commit": "29f804e35",
+      "measuredFrom": "/Users/mac/harness-mesh"
+    }
+  ]
+}

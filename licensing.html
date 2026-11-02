@@ -125,6 +125,24 @@ valiant gate
 </code></pre>
 <p>You should see <code>valiant: this machine's licence is not valid: licence expired 2 day(s) ago</code> and exit <strong>2</strong> — a contract that could not be checked.</p>
 <p>That is the whole enforcement: <strong>time, not a phone-home.</strong> A machine that has gone quiet still stops, because its licence has an expiry date in it. Exit 2 is red: a build that cannot check is not a build that passed.</p>
+<h2>5a. Verified online, with a 24-hour cache</h2>
+<p>Rob, 2026-11-02: *"licence verification needs to be done online"*, then *"24 hr cache"*. A licence that verified locally can still have been revoked since, so the issuer is asked — and the four rules are opposites of each other on purpose:</p>
+<div class="table-scroll"><table>
+<tr><th>situation</th><th>what happens</th></tr>
+<tr><td>the issuer says valid</td><td>allowed, and that verdict is believed for <strong>24 hours</strong></td></tr>
+<tr><td>the issuer says revoked</td><td><strong>refused now</strong> — a revocation never waits for a cache to expire</td></tr>
+<tr><td>the server cannot be reached, last verdict &lt; 24 h</td><td>allowed, and the run <strong>says</strong> it is using a cached verdict</td></tr>
+<tr><td>the server cannot be reached, no verdict in 24 h</td><td><strong>cannot check</strong> — red, because an unreachable server is not a licence</td></tr>
+</table></div>
+<p>The cache is keyed by licence id, so a re-issued licence never inherits the previous one's health.</p>
+<p>You should see the verdict and how old the cached answer is:</p>
+<pre><code>
+valiant licence --online            # ask now, print the verdict and the cache age
+valiant licence --online --enable   # use it on every gate run
+valiant licence --online --disable  # stop asking (the local check still applies)
+</code></pre>
+<p>It prints <code>online: OK (server)</code> or <code>online: OK (cache, 6h old)</code>, and on a refusal prints <code>online: REFUSED — …</code> with exit 2.</p>
+<p>It is <strong>opt-in</strong> because turning every gate run into a network call would change what an existing install does the day it updates.</p>
 <h2>6. Revocation — loud first, then blocked</h2>
 <p>Rob, 2026-10-30: *"Block after grace."* A <code>jti</code> listed in <code>~/.valiant/revoked.txt</code> is not refused the instant it appears:</p>
 <div class="table-scroll"><table>

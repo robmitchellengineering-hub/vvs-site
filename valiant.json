@@ -20,6 +20,19 @@
         "node",
         "scripts/feed-truth.mjs"
       ]
+    },
+    {
+      "name": "adoptions-current",
+      "cmd": [
+        "node",
+        "scripts/adoptions-truth.mjs"
+      ],
+      "subject": "index.html",
+      "sabotage": {
+        "find": "<strong>211 guard scripts and 514 mutation proofs</strong>",
+        "replace": "<strong>133 guard scripts and 514 mutation proofs</strong>",
+        "why": "the page states a number the measurement does not back"
+      }
     }
   ],
   "ledger": false,
