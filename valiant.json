@@ -1,0 +1,35 @@
+{
+  "gates": [
+    {
+      "name": "status-current",
+      "cmd": [
+        "node",
+        "scripts/status-truth.mjs"
+      ]
+    },
+    {
+      "name": "downloads-current",
+      "cmd": [
+        "node",
+        "scripts/downloads-truth.mjs"
+      ]
+    }
+  ],
+  "ledger": false,
+  "guards": [
+    {
+      "invariant": 27,
+      "backs": "a published number is evidence that must be recomputed against reality, never transcribed once",
+      "name": "status-number-is-a-claim",
+      "file": "index.html",
+      "find": "<strong>43 universal invariants</strong>",
+      "replace": "<strong>99 universal invariants</strong>",
+      "check": [
+        "node",
+        "scripts/status-truth.mjs",
+        "--sdk",
+        "/Users/mac/code/valiant-verification-sdk"
+      ]
+    }
+  ]
+}

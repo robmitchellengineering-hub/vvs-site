@@ -1,0 +1,28 @@
+{
+  "latest": "0.10.1",
+  "updated": "2026-11-02",
+  "versions": [
+    {
+      "version": "0.10.1",
+      "file": "valiant-verification-sdk-0.10.1.tgz",
+      "sha256": "172dc4bebe94504aa678e2f102925dc0b144751ed656ddfdb93bdb13ec3cee12",
+      "date": "2026-11-02",
+      "notes": "signed ratchet over the gate list and the proof set; selfcheck; the nine artefact conventions; claims register"
+    },
+    {
+      "version": "0.3.0",
+      "file": "valiant-verification-sdk-0.3.0.tgz",
+      "sha256": "57372c7aa5b860b11969201a64e20c86365bda981d8be5a2cc6802b52511c50b",
+      "date": "2026-11-02",
+      "notes": "monthly licences with 7-day grace, revocation with 48h grace, 1 machine + 1 CI runner per seat, Windows support, corpus collected by default, online licence check",
+      "superseded": true
+    },
+    {
+      "version": "0.2.0",
+      "file": "valiant-verification-sdk-0.2.0.tgz",
+      "sha256": "644807837d60914f914fed41d8a6d212cce3317bfd35e5456aaaf5ef965a08d8",
+      "date": "2026-10-29",
+      "superseded": true
+    }
+  ]
+}
