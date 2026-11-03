@@ -1,7 +1,13 @@
 {
- "latest": "0.16.0",
+ "latest": "0.16.1",
  "updated": "2026-11-04",
  "versions": [
+  {
+   "version": "0.16.1",
+   "file": "valiant-verification-sdk-0.16.1.tgz",
+   "sha256": "05b5dfd19a881f989b186023d7661f41a80d0c014dfbc4c534cefafdbd8928b1",
+   "size": 209836
+  },
   {
    "version": "0.16.0",
    "file": "valiant-verification-sdk-0.16.0.tgz",
