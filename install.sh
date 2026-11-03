@@ -12,7 +12,7 @@
 # It never asks for a password, never sends a prompt anywhere, and never edits your repository.
 set -eu
 
-VERSION="${VALIANT_VERSION:-0.15.0}"
+VERSION="${VALIANT_VERSION:-0.16.0}"
 BASE="${VALIANT_BASE:-https://vvs.morpheus.nz}"
 TARBALL="${BASE}/downloads/valiant-verification-sdk-${VERSION}.tgz"
 TRIAL="${BASE}/downloads/trial-2026-11.licence"
