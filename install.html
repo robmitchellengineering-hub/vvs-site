@@ -119,16 +119,18 @@
 
     <div class="card">
       <h2 style="font-size:22px;margin:0 0 8px">1 · What you need</h2>
-      <p class="muted">Node 18 or newer, and a licence file from your issuer — a signed token beginning <code>vvs1…</code> (a few hundred bytes — it grows only when the issuer includes a revocation list). Without one, <code>valiant gate</code> refuses by design: it will not call a repository fine unless it is licensed to look. Nothing else is downloaded, at install time or at run time.</p>
+      <p class="muted"><strong>Node 18 or newer. That is the whole list.</strong> No account, no licence file to fetch, nothing to answer: the installer puts a <strong>14-day trial licence</strong> on the machine if it has none, so <code>valiant gate</code> works on the first run. A licence is a signed token beginning <code>vvs1…</code> (a few hundred bytes); <code>gate</code> refuses without one <em>by design</em> — it will not call a repository fine unless it is licensed to look — which is why the installer installs one rather than telling you to go and get one. Nothing else is downloaded, at install time or at run time.</p>
     </div>
 
     <div class="card" style="margin-top:16px">
       <h2 style="font-size:22px;margin:0 0 8px">2 · Install</h2>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code># install straight from our registry — nothing to ask for
-npm install -g "https://api.morpheus.nz/api/functions/getPackage?name=valiant-verification-sdk&amp;version=latest"
-valiant --help
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>curl -fsSL https://vvs.morpheus.nz/install.sh | sh</code></pre>
+      <p class="muted" style="margin:14px 0 0">That is the install. It checks Node, installs the <code>valiant</code> CLI (globally, or under <code>~/.valiant/sdk</code> when a global install would need root), installs the trial licence, and prints the one command to run in your repository. It never asks for a password and never edits a repository.</p>
+      <p class="muted"><strong>Running Claude Code, Cursor or another agent?</strong> Paste exactly that line into it. There is nothing to answer, and no second step hidden behind a purchase — the agent installs, then runs <code>valiant setup</code> in your repo.</p>
+      <p class="muted">Prefer to see the pieces, or already have a licence?</p>
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>npm install -g "https://api.morpheus.nz/api/functions/getPackage?name=valiant-verification-sdk&amp;version=latest"
 
-valiant licence --file ./acme.licence   # install it, once per machine
+valiant licence --file ./acme.licence   # your own licence, once per machine
 valiant licence --status               # what this machine holds: plan, seats, expiry
 valiant licence --sync https://vvs.morpheus.nz/revocations.vvs   # pick up the revocation list, now</code></pre>
       <p class="muted">A licence is <strong>monthly</strong> — 30 days, the billing period — and renews while the subscription is paid. A
@@ -141,6 +143,8 @@ valiant licence --sync https://vvs.morpheus.nz/revocations.vvs   # pick up the r
 
     <div class="card" style="margin-top:16px">
       <h2 style="font-size:22px;margin:0 0 8px">3 · First run, in five minutes</h2>
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>cd your-repo &amp;&amp; valiant setup</code></pre>
+      <p class="muted" style="margin:14px 0 0"><code>setup</code> is the whole first run: it writes <code>valiant.json</code> (the only file it adds), proposes a guard, proves it can fail, and runs the gate. If you would rather see each step:</p>
 <pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant init      # finds your checks, writes valiant.json — the only file it adds
 valiant mutate    # proves the guard it proposed can fail; writes mutations.json
 valiant gate      # the verdict</code></pre>
@@ -186,7 +190,7 @@ valiant gate      # the verdict</code></pre>
       <tr><th>what you see</th><th>what it means</th></tr>
       <tr><td>this repo has no valiant.json yet</td><td>run <code>valiant init</code> here</td></tr>
       <tr><td>init: I found no check to gate on</td><td>no test command was found — the message lists every place it looked</td></tr>
-      <tr><td>gate needs a licence on this machine</td><td><code>valiant licence --file &lt;path&gt;</code></td></tr>
+      <tr><td>gate needs a licence on this machine</td><td><code>valiant licence --file &lt;path&gt;</code> — or just re-run the installer, which fetches the trial</td></tr>
       <tr><td>licence expired …</td><td>the subscription lapsed; renew it</td></tr>
       <tr><td>this licence (…) has been REVOKED. It keeps working for N more hour(s)</td><td>it still works for 48 hours; contact your issuer, because after that every gate stops</td></tr>
       <tr><td>the grace has run out</td><td>the 48 hours passed — your issuer has withdrawn this licence</td></tr>
