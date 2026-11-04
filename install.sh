@@ -14,8 +14,8 @@ set -eu
 
 VERSION="${VALIANT_VERSION:-0.16.1}"
 BASE="${VALIANT_BASE:-https://vvs.morpheus.nz}"
+MORPHEUS_APP="${MORPHEUS_APP:-https://morpheus.nz}"
 TARBALL="${BASE}/downloads/valiant-verification-sdk-${VERSION}.tgz"
-TRIAL="${BASE}/downloads/trial-2026-11.licence"
 BIN_DIR="${HOME}/.local/bin"
 
 say() { printf '%s\n' "$*"; }
@@ -43,17 +43,17 @@ VALIANT="$(command -v valiant || true)"
 [ -n "${VALIANT}" ] || die "installed, but 'valiant' is not on PATH — see the export line above."
 
 say "2/3  licence"
+# A LICENCE IS ISSUED TO YOUR MORPHEUS ACCOUNT. The trial used to be a static file on this site — the same token for
+# every visitor, unattributable and expiring for everyone on one date. It is now minted under the account, appears on
+# /licences where it can be revoked, and does not depend on a file being republished. (Rob, 2026-11-04: "it needs a
+# login to get the trial".)
 if "${VALIANT}" licence --status 2>/dev/null | grep -q "licence OK"; then
   say "     this machine already has one:"
   "${VALIANT}" licence --status | sed 's/^/     /'
 else
-  tmp="$(mktemp)"
-  if curl -fsSL "$TRIAL" -o "$tmp" 2>/dev/null; then
-    "${VALIANT}" licence --file "$tmp" | sed 's/^/     /'
-    rm -f "$tmp"
-  else
-    say "     no trial licence reachable — run: valiant licence --file <your licence>"
-  fi
+  say "     no licence on this machine yet."
+  say "     get one (free 14-day trial) at:  ${MORPHEUS_APP}/licences"
+  say "     then run:                        valiant licence <the token it shows you>"
 fi
 
 say "3/3  done"
