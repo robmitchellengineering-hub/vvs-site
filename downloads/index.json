@@ -60,10 +60,10 @@
  "packages": [
   {
    "name": "askalice",
-   "version": "0.2.1",
-   "file": "valiant-askalice-0.2.1.tgz",
+   "version": "0.2.2",
+   "file": "valiant-askalice-0.2.2.tgz",
    "setup": "askalice-setup.cmd",
-   "sha256": "466f42d6e6ac5b4d17723a8ffbffa85d8b15ada8c7feacadc61d5de31507a691",
+   "sha256": "f630a55a4875a75d8fb4915ce6c34787610ea2927e35049bcfbb5d6b19774c4c",
    "note": "Windows one-file installer; askalice ui opens the page"
   }
  ]
