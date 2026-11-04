@@ -1,0 +1,20 @@
+{
+ "schema": 1,
+ "what": "The current Valiant SDK release. The ONLY place a version is declared; every consumer reads this rather than pinning.",
+ "current": "0.16.1",
+ "sha256": "05b5dfd19a881f989b186023d7661f41a80d0c014dfbc4c534cefafdbd8928b1",
+ "bytes": 209836,
+ "file": "valiant-verification-sdk-0.16.1.tgz",
+ "kid": "vvs-2026-11",
+ "publishedAt": "2026-11-04",
+ "channels": {
+  "site": "https://vvs.morpheus.nz/downloads/valiant-verification-sdk-0.16.1.tgz",
+  "registry": "https://api.morpheus.nz/api/functions/getPackage?name=valiant-verification-sdk&version=0.16.1",
+  "install": "curl -fsSL https://vvs.morpheus.nz/install.sh | sh -s -- --licence <token>"
+ },
+ "consumers": {
+  "harness-mesh": "scripts/vvs-update.sh writes vendor/valiant-current from this file",
+  "installer": "install.sh defaults VERSION to this file's current",
+  "sdk-authors": "the release tool refuses to publish a version that is not named here"
+ }
+}
