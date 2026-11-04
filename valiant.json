@@ -22,6 +22,19 @@
       ]
     },
     {
+      "name": "checkout-current",
+      "cmd": [
+        "node",
+        "scripts/checkout-truth.mjs"
+      ],
+      "subject": "index.html",
+      "sabotage": {
+        "find": "encodeURIComponent('https://morpheus.nz/claim?session_id=",
+        "replace": "encodeURIComponent(location.origin + '/claim?session_id=",
+        "why": "a paid buyer is redirected to /claim on this origin, where no such page exists"
+      }
+    },
+    {
       "name": "adoptions-current",
       "cmd": [
         "node",
