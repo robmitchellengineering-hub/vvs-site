@@ -65,6 +65,13 @@
    "setup": "askalice-setup.cmd",
    "sha256": "3b0fbd1e62c760b307219b31e221e8762f9a8bc05984c75429477dc45d788675",
    "note": "Windows one-file installer; askalice ui opens the page"
+  },
+  {
+   "name": "askalice-portable",
+   "version": "0.3.0",
+   "file": "askalice-win-x64.zip",
+   "sha256": "0282da37bddf7de951dcee219a05fdc5f7a792f7a042f7825ee8a1c5a87c582c",
+   "note": "Self-contained: Node is bundled. Extract and double-click AskAlice.cmd \u2014 nothing to install."
   }
  ]
 }
