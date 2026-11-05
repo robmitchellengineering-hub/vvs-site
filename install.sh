@@ -12,9 +12,15 @@
 # It never asks for a password, never sends a prompt anywhere, and never edits your repository.
 set -eu
 
-VERSION="${VALIANT_VERSION:-0.16.1}"
+VERSION="${VALIANT_VERSION:-latest}"
 BASE="${VALIANT_BASE:-https://vvs.morpheus.nz}"
 MORPHEUS_APP="${MORPHEUS_APP:-https://morpheus.nz}"
+# A version is never typed here. "latest" resolves from the site's own index, so a new release cannot
+# leave this installer handing out an old build (the same hardcoded-pin class that left a customer page on 0.2.0).
+if [ "${VERSION}" = "latest" ]; then
+  VERSION="$(curl -fsSL "${BASE}/downloads/index.json" 2>/dev/null | sed -n 's/.*"latest"[[:space:]]*:[[:space:]]*"\([0-9][0-9.]*\)".*/\1/p' | head -1)"
+  [ -n "${VERSION}" ] || die "could not resolve the current build from ${BASE}/downloads/index.json"
+fi
 TARBALL="${BASE}/downloads/valiant-verification-sdk-${VERSION}.tgz"
 BIN_DIR="${HOME}/.local/bin"
 
