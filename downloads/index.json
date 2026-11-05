@@ -70,8 +70,8 @@
    "name": "askalice-portable",
    "version": "0.3.0",
    "file": "askalice-win-x64.zip",
-   "sha256": "0282da37bddf7de951dcee219a05fdc5f7a792f7a042f7825ee8a1c5a87c582c",
-   "note": "Self-contained: Node is bundled. Extract and double-click AskAlice.cmd \u2014 nothing to install."
+   "sha256": "13dc5d07dc2daec9304236b0e423791b0b879b4cf0246a2e59aee2cce8d4080d",
+   "note": "Self-contained: Node bundled. Extract and double-click AskAlice.cmd. Includes Connect-your-sources."
   }
  ]
 }
