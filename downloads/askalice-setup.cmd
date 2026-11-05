@@ -18,9 +18,9 @@ echo.
 echo   askalice - a claim, its source, and the line in it.
 echo.
 
-set TARBALL=https://vvs.morpheus.nz/downloads/valiant-askalice-0.2.2.tgz
+set TARBALL=https://vvs.morpheus.nz/downloads/valiant-askalice-0.3.0.tgz
 REM A tarball sitting next to this file wins, so the same script works offline or from a USB stick.
-if exist "%~dp0valiant-askalice-0.2.2.tgz" set TARBALL=%~dp0valiant-askalice-0.2.2.tgz
+if exist "%~dp0valiant-askalice-0.3.0.tgz" set TARBALL=%~dp0valiant-askalice-0.3.0.tgz
 
 REM ---- 1. Node -------------------------------------------------------------
 where node >nul 2>nul
