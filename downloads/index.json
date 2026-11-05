@@ -60,17 +60,17 @@
  "packages": [
   {
    "name": "askalice",
-   "version": "0.4.0",
-   "file": "valiant-askalice-0.4.0.tgz",
+   "version": "0.4.1",
+   "file": "valiant-askalice-0.4.1.tgz",
    "setup": "askalice-setup.cmd",
-   "sha256": "3deb1a5d28424169b3aaab0a99dd2dd6b5df987fbe5c20ae22b3adcd69ff8361",
+   "sha256": "48cc06fde46b0c79f3eba178c2e95b0cc82ca35f7ad5786133c3848206737383",
    "note": "npm install path (needs Node)"
   },
   {
    "name": "askalice-portable",
-   "version": "0.4.0",
+   "version": "0.4.1",
    "file": "askalice-win-x64.zip",
-   "sha256": "2c18fa38cc86c827111ad8b3f7ce91c9da203a01b5ff4b1b45341419c23f4246",
+   "sha256": "cc40d97ec4e4c92bcd5b387e081d770d14ee93355723dbc2cebc11e49433b1b1",
    "note": "Self-contained: Node bundled. Extract and double-click AskAlice.cmd."
   }
  ]
