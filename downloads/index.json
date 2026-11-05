@@ -68,9 +68,9 @@
   },
   {
    "name": "askalice-portable",
-   "version": "0.4.1",
+   "version": "0.4.2",
    "file": "askalice-win-x64.zip",
-   "sha256": "cc40d97ec4e4c92bcd5b387e081d770d14ee93355723dbc2cebc11e49433b1b1",
+   "sha256": "d3afddd30698aeb9dd7e343fead39a598db166e2150d69856ec479eba2b9fc65",
    "note": "Self-contained: Node bundled. Extract and double-click AskAlice.cmd."
   }
  ]
