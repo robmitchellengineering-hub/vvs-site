@@ -72,6 +72,20 @@
    "file": "askalice-win-x64.zip",
    "sha256": "d3afddd30698aeb9dd7e343fead39a598db166e2150d69856ec479eba2b9fc65",
    "note": "Self-contained: Node bundled. Extract and double-click AskAlice.cmd."
+  },
+  {
+   "name": "askalice-macos",
+   "version": "0.4.2",
+   "file": "askalice-macos.zip",
+   "sha256": "48926f67747647f17750d267ceab3a1c8a9adc680a7e87d7d5abb8391a28559f",
+   "note": "macOS (Apple Silicon + Intel), Node bundled"
+  },
+  {
+   "name": "askalice-linux",
+   "version": "0.4.2",
+   "file": "askalice-linux-x64.tar.gz",
+   "sha256": "6a84f887d5fe5a5ab8096f7a60a72a2c6093ce5d7d97d9cb5e12d21b39351af4",
+   "note": "Linux x86-64, Node bundled"
   }
  ]
 }
