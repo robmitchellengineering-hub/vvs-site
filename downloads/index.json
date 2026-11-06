@@ -60,10 +60,10 @@
  "packages": [
   {
    "name": "askalice",
-   "version": "0.4.1",
-   "file": "valiant-askalice-0.4.1.tgz",
+   "version": "0.4.2",
+   "file": "valiant-askalice-0.4.2.tgz",
    "setup": "askalice-setup.cmd",
-   "sha256": "48cc06fde46b0c79f3eba178c2e95b0cc82ca35f7ad5786133c3848206737383",
+   "sha256": "f05ea1b13d7d90c0c52d116a77634ab09431125a1ef3439d02dba2922232115d",
    "note": "npm install path (needs Node)"
   },
   {
