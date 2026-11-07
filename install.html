@@ -118,42 +118,40 @@
   <div class="wrap">
 
     <div class="card">
-      <h2 style="font-size:22px;margin:0 0 8px">1 · What you need</h2>
-      <p class="muted"><strong>Node 18 or newer, and a Morpheus account.</strong> The <strong>free 14-day trial is issued to that account</strong> — sign in, press start trial, and it appears on <a href="https://morpheus.nz/licences">morpheus.nz/licences</a> where you can see and revoke it like any other licence. It is not a file we publish: it is minted for you, which is what makes it yours. A licence is a signed token beginning <code>vvs1…</code> (a few hundred bytes); <code>gate</code> refuses without one <em>by design</em> — it will not call a repository fine unless it is licensed to look — which is why the installer installs one rather than telling you to go and get one. Nothing else is downloaded, at install time or at run time.</p>
+      <h2 style="font-size:22px;margin:0 0 8px">1 · Install</h2>
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>curl -fsSL https://vvs.morpheus.nz/install.sh | sh</code></pre>
+      <p class="muted" style="margin:14px 0 0">That is the whole install. It checks <strong>Node 18+</strong>, installs the <code>valiant</code> CLI, and stops. Nothing else is downloaded, and it never edits a repository.</p>
     </div>
 
     <div class="card" style="margin-top:16px">
-      <h2 style="font-size:22px;margin:0 0 8px">2 · Install</h2>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>curl -fsSL https://vvs.morpheus.nz/install.sh | sh</code></pre>
-      <p class="muted" style="margin:14px 0 0">That is the install. It checks Node, installs the <code>valiant</code> CLI (globally, or under <code>~/.valiant/sdk</code> when a global install would need root), and tells you where to get your licence. It never edits a repository.</p>
-      <p class="muted"><strong>Running Claude Code, Cursor or another agent?</strong> It needs one thing from you it cannot get itself: a licence, which is issued to your account. Sign in once, start the trial, then paste the install line with the token on it — the agent does the rest and runs <code>valiant setup</code> in your repo.</p>
-      <p class="muted">Prefer to see the pieces, or already have a licence?</p>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>npm install -g "https://api.morpheus.nz/api/functions/getPackage?name=valiant-verification-sdk&amp;version=latest"
-
-valiant licence --file ./acme.licence   # your own licence, once per machine
-valiant licence --status               # what this machine holds: plan, seats, expiry
-valiant licence --sync https://vvs.morpheus.nz/revocations.vvs   # pick up the revocation list, now</code></pre>
-      <p class="muted">A licence is <strong>monthly</strong> — 30 days, the billing period — and renews while the subscription is paid. A
-      <strong>failed payment mints a 7-day grace licence</strong>, so a declined card does not stop your work the same day. If a
-      licence is <strong>revoked</strong>, it keeps working for 48 hours with a warning on every run, then stops: a wrong
-      revocation is not meant to become your outage. The last line above is optional — the list also travels inside your next
-      renewal — it is there for the day you need it immediately.</p>
-      <p class="note" style="margin-bottom:0">The SDK is <strong>not on npm</strong>, deliberately — no third-party registry to depend on or be taken over. Distribution is our own registry, and the command above pulls the current build with its checksum. If you would rather have a file: <a href="downloads/">pinned builds with their <code>.sha256</code></a>, and <a href="downloads/index.json">the index</a> says which version is current.</p>
+      <h2 style="font-size:22px;margin:0 0 8px">2 · Get your free trial</h2>
+      <a class="btn primary" href="https://morpheus.nz/licences" style="margin:4px 0 14px">Get the 14-day trial</a>
+      <p class="muted">The trial is issued to your Morpheus account — sign in with Google, press <strong>start trial</strong>, copy the token it shows, then:</p>
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant licence &lt;the token the page shows you&gt;</code></pre>
+      <p class="muted" style="margin:14px 0 0">One sign-in, once. The licence is minted for you — it lives at <code>~/.valiant/licence</code>, is checked offline, and you can see or revoke it any time on the same page.</p>
     </div>
 
     <div class="card" style="margin-top:16px">
       <h2 style="font-size:22px;margin:0 0 8px">3 · First run, in five minutes</h2>
 <pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>cd your-repo &amp;&amp; valiant setup</code></pre>
-      <p class="muted" style="margin:14px 0 0">Before the first run, put your licence on the machine — sign in at <a href="https://morpheus.nz/licences">morpheus.nz/licences</a>, start the free trial, then:</p>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant licence &lt;the token the page shows you&gt;</code></pre>
-      <p class="muted" style="margin:14px 0 0"><code>setup</code> is the whole first run: it writes <code>valiant.json</code> (the only file it adds), proposes a guard, proves it can fail, and runs the gate. If you would rather see each step:</p>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant init      # finds your checks, writes valiant.json — the only file it adds
-valiant mutate    # proves the guard it proposed can fail; writes mutations.json
-valiant gate      # the verdict</code></pre>
-      <p class="muted" style="margin:14px 0 0"><code>init</code> proposes a first guard <strong>only after it has watched it go red</strong>: it picks a module your tests import, makes a concrete edit, and runs it through the real mutation engine. If nothing can be proved it says so and proposes nothing, rather than handing you a template that will fail on your first try.</p>
+      <p class="muted" style="margin:14px 0 0"><code>setup</code> is the whole first run in one command: it writes <code>valiant.json</code> (the only file it adds), proposes a guard, proves it can fail, and runs the gate.</p>
     </div>
 
-    <h2 style="font-size:22px;margin:36px 0 10px">What each verdict word means</h2>
+    <details style="margin-top:28px">
+      <summary style="cursor:pointer;font-weight:700;color:var(--navy)">Already have a licence, or want to see the pieces?</summary>
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7;margin-top:14px"><code>npm install -g "https://api.morpheus.nz/api/functions/getPackage?name=valiant-verification-sdk&amp;version=latest"
+
+valiant licence --file ./acme.licence   # your own licence, once per machine
+valiant licence --status               # what this machine holds: plan, seats, expiry
+valiant licence --sync https://vvs.morpheus.nz/revocations.vvs   # pick up the revocation list, now</code></pre>
+      <p class="muted" style="margin:14px 0 0">A licence is <strong>monthly</strong> — 30 days, the billing period — and renews while the subscription is paid. A <strong>failed payment mints a 7-day grace licence</strong>, so a declined card does not stop your work the same day. If a licence is <strong>revoked</strong>, it keeps working for 48 hours with a warning, then stops. The last line above is optional — the list also travels inside your next renewal.</p>
+      <p class="muted">The SDK is <strong>not on npm</strong>, deliberately — no third-party registry to depend on or be taken over. Distribution is our own registry, and the command above pulls the current build with its checksum. If you would rather have a file: <a href="downloads/">pinned builds with their <code>.sha256</code></a>, and <a href="downloads/index.json">the index</a> says which version is current.</p>
+    </details>
+
+    <details style="margin-top:28px">
+      <summary style="cursor:pointer;font-weight:700;color:var(--navy)">Reference — what the words mean, where the verdict lands, and troubleshooting</summary>
+
+    <h2 style="font-size:22px;margin:28px 0 10px">What each verdict word means</h2>
     <div class="table-scroll"><table>
       <tr><th>word</th><th>meaning</th><th>what to do</th></tr>
       <tr><td><code>CAUGHT</code></td><td>the check went red when the guard's subject was broken, and green when it was restored</td><td>nothing — this guard is real</td></tr>
@@ -165,7 +163,7 @@ valiant gate      # the verdict</code></pre>
     </table></div>
       <p class="swipe">Swipe the table sideways to see every column →</p>
 
-    <h2 style="font-size:22px;margin:36px 0 10px">4 · Where the verdict lands</h2>
+    <h2 style="font-size:22px;margin:28px 0 10px">4 · Where the verdict lands</h2>
     <div class="table-scroll"><table>
       <tr><th>surface</th><th>command</th><th>what appears</th></tr>
       <tr><td>GitHub Actions</td><td><code>valiant ci-init github</code></td><td>a workflow that runs the gate; one secret, <code>VALIANT_LICENCE</code></td></tr>
@@ -177,7 +175,7 @@ valiant gate      # the verdict</code></pre>
       <p class="swipe">Swipe the table sideways to see every column →</p>
     <p class="note">Every one of these ships inside the same tarball. There are no add-on downloads, and no feature a higher tier unlocks.</p>
 
-    <h2 style="font-size:22px;margin:36px 0 10px">5 · The exit-code contract</h2>
+    <h2 style="font-size:22px;margin:28px 0 10px">5 · The exit-code contract</h2>
     <div class="table-scroll"><table>
       <tr><th>code</th><th>meaning</th></tr>
       <tr><td><code>0</code></td><td>every contract holds</td></tr>
@@ -187,7 +185,7 @@ valiant gate      # the verdict</code></pre>
       <p class="swipe">Swipe the table sideways to see every column →</p>
     <p class="note">2 is never a pass, and in CI it fails the job exactly like 1.</p>
 
-    <h2 style="font-size:22px;margin:36px 0 10px">6 · When it does not work</h2>
+    <h2 style="font-size:22px;margin:28px 0 10px">6 · When it does not work</h2>
     <div class="table-scroll"><table>
       <tr><th>what you see</th><th>what it means</th></tr>
       <tr><td>this repo has no valiant.json yet</td><td>run <code>valiant init</code> here</td></tr>
@@ -202,7 +200,7 @@ valiant gate      # the verdict</code></pre>
     </table></div>
       <p class="swipe">Swipe the table sideways to see every column →</p>
 
-    <h2 style="font-size:22px;margin:36px 0 10px">7 · What this does not do</h2>
+    <h2 style="font-size:22px;margin:28px 0 10px">7 · What this does not do</h2>
     <ul class="muted" style="line-height:1.9">
       <li>It cannot tell whether your check <em>means</em> anything. A check that keeps state outside its copy can look like a catch.</li>
       <li>It is not a security boundary: a check writing outside its copy by absolute path is reported after the fact.</li>
@@ -210,6 +208,8 @@ valiant gate      # the verdict</code></pre>
       <li>Scope today: one repository at a time, macOS and Linux. Windows is untested.</li>
       <li>Not on npm, and no CI service of ours — it produces a verdict; it does not become the queue.</li>
     </ul>
+
+    </details>
 
     <div class="cta" style="margin-top:34px">
       <a class="btn primary" href="index.html#pricing">See the tiers</a>
