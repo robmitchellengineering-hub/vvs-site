@@ -118,6 +118,20 @@
 
 <section class="tight">
   <div class="wrap">
+    <h2>The control standard</h2>
+    <p class="muted">The deficit measures how much of a model is verified. The control number measures whether an AI stayed under human authority — the same discipline: a falsifiable contract, a guard that can fail, a number with a denominator.</p>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card"><div class="tag">approved</div><h3>Every action needs a human yes</h3><p class="muted">An unapproved action is a control break, logged.</p></div>
+      <div class="card"><div class="tag">traceable</div><h3>Every claim points at a re-checkable source</h3><p class="muted">No "the AI says so" — ground truth a human can re-open.</p></div>
+      <div class="card"><div class="tag">restated</div><h3>The agent says what it means before it acts</h3><p class="muted">The asked-vs-meant gap is closed before the action, not after.</p></div>
+    </div>
+    <pre style="background:#0f2140;color:#dbe7f2;padding:18px 20px;border-radius:12px;overflow:auto;font-size:13.5px;line-height:1.6;margin-top:20px"><code>valiant control          # 0 = under control · 1 = a control broke · 2 = could not check
+valiant control --prove  # every guard shown to fail on a seeded violation</code></pre>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
     <h2>Run the suite</h2>
     <p class="muted">The conformance suite is public and it is designed to be able to fail. A fresh clone runs in seconds:</p>
     <pre style="background:#0f2140;color:#dbe7f2;padding:18px 20px;border-radius:12px;overflow:auto;font-size:13.5px;line-height:1.6"><code>git clone https://github.com/robmitchellengineering-hub/vds-spec
