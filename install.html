@@ -118,29 +118,10 @@
   <div class="wrap">
 
     <div class="card">
-      <h2 style="font-size:22px;margin:0 0 8px">1 · Install</h2>
+      <h2 style="font-size:22px;margin:0 0 8px">Install — one command</h2>
 <pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>curl -fsSL https://vvs.morpheus.nz/install.sh | sh</code></pre>
-      <p class="muted" style="margin:14px 0 0">That is the whole install. It checks <strong>Node 18+</strong>, installs the <code>valiant</code> CLI, and <strong>opens the control panel in your browser</strong>. Nothing else is downloaded, and it never edits a repository.</p>
-    </div>
-
-    <div class="card" style="margin-top:16px">
-      <h2 style="font-size:22px;margin:0 0 8px">2 · Get your free trial</h2>
-      <a class="btn primary" href="https://morpheus.nz/licences" style="margin:4px 0 14px">Get the 14-day trial</a>
-      <p class="muted">The trial is issued to your Morpheus account — sign in with Google, press <strong>start trial</strong>, copy the token it shows, then:</p>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant licence &lt;the token the page shows you&gt;</code></pre>
-      <p class="muted" style="margin:14px 0 0">One sign-in, once. The licence is minted for you — it lives at <code>~/.valiant/licence</code>, is checked offline, and you can see it any time on the same page. Cancelling the subscription there stops renewal; <strong>revoking</strong> a licence is ours, not the customer's.</p>
-    </div>
-
-    <div class="card" style="margin-top:16px">
-      <h2 style="font-size:22px;margin:0 0 8px">3 · First run, in five minutes</h2>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>cd your-repo &amp;&amp; valiant setup</code></pre>
-      <p class="muted" style="margin:14px 0 0"><code>setup</code> is the whole first run in one command: it writes <code>valiant.json</code> (the only file it adds), proposes a guard, proves it can fail, and runs the gate.</p>
-    </div>
-
-    <div class="card" style="margin-top:16px">
-      <h2 style="font-size:22px;margin:0 0 8px">4 · The control panel (GUI)</h2>
-<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant ui</code></pre>
-      <p class="muted" style="margin:14px 0 0">The control panel — a local web app at <code>http://localhost:8787</code>. The installer opens it for you; you can start it again any time with <code>valiant ui</code>. It is the human face of the SDK: toggle enforcement on/off, watch the gate run live, and see the AI-control number (<code>0</code> under control · <code>1</code> a control broke · <code>2</code> could not check) with yes/no ticks. It runs on your machine and nothing leaves it.</p>
+      <p class="muted" style="margin:14px 0 0">That is the whole install. It checks <strong>Node 18+</strong>, installs the <code>valiant</code> CLI, and <strong>opens the control panel in your browser</strong>. Everything else happens in that panel — no terminal after this.</p>
+      <p class="muted" style="margin:14px 0 0">The panel takes you through the rest, in order: <strong>get the free 14-day trial</strong> (paste the token) → <strong>add a repository</strong> (it writes one file, proves a guard, runs the gate) → <strong>toggle enforcement</strong> and watch the gate live. If you would rather use the command line, the pieces are below.</p>
     </div>
 
     <details style="margin-top:28px">
