@@ -62,14 +62,26 @@ else
   say "     then run:                        valiant licence <the token it shows you>"
 fi
 
-say "3/3  done"
+say "3/3  opening the control panel"
+# The GUI is part of the install: it opens your browser to the control panel. It runs locally
+# (nothing leaves this machine) and stops when you close the terminal or press Ctrl-C.
+if command -v nohup >/dev/null 2>&1; then
+  nohup "${VALIANT}" ui < /dev/null >/dev/null 2>&1 &
+else
+  "${VALIANT}" ui < /dev/null >/dev/null 2>&1 &
+fi
+say "     the control panel should now be open in your browser (http://localhost:8787)"
+
 cat <<'NEXT'
 
-  next:  cd into a repository and run
+  the panel is the human face of the SDK:
+    - toggle enforcement on/off
+    - watch the gate run live
+    - the AI-control number (0 under control · 1 a control broke · 2 could not check), with yes/no ticks
 
-             valiant setup     # writes valiant.json, proposes a guard, runs the gate
+  if the browser did not open, run:  valiant ui
 
-         or, if you want the pieces:  valiant init → valiant mutate → valiant gate
+  next, on a repository:  valiant setup     # writes valiant.json, proposes a guard, runs the gate
 
   the trial lasts 14 days; licences and renewal: https://vvs.morpheus.nz/install.html
 NEXT
