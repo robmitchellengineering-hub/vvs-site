@@ -128,13 +128,19 @@
       <a class="btn primary" href="https://morpheus.nz/licences" style="margin:4px 0 14px">Get the 14-day trial</a>
       <p class="muted">The trial is issued to your Morpheus account — sign in with Google, press <strong>start trial</strong>, copy the token it shows, then:</p>
 <pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant licence &lt;the token the page shows you&gt;</code></pre>
-      <p class="muted" style="margin:14px 0 0">One sign-in, once. The licence is minted for you — it lives at <code>~/.valiant/licence</code>, is checked offline, and you can see or revoke it any time on the same page.</p>
+      <p class="muted" style="margin:14px 0 0">One sign-in, once. The licence is minted for you — it lives at <code>~/.valiant/licence</code>, is checked offline, and you can see it any time on the same page. Cancelling the subscription there stops renewal; <strong>revoking</strong> a licence is ours, not the customer's.</p>
     </div>
 
     <div class="card" style="margin-top:16px">
       <h2 style="font-size:22px;margin:0 0 8px">3 · First run, in five minutes</h2>
 <pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>cd your-repo &amp;&amp; valiant setup</code></pre>
       <p class="muted" style="margin:14px 0 0"><code>setup</code> is the whole first run in one command: it writes <code>valiant.json</code> (the only file it adds), proposes a guard, proves it can fail, and runs the gate.</p>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2 style="font-size:22px;margin:0 0 8px">4 · The control panel (GUI)</h2>
+<pre style="background:#0f1f33;color:#e6eef7;padding:18px 20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.7"><code>valiant ui</code></pre>
+      <p class="muted" style="margin:14px 0 0">Starts the control panel — a local web app that opens at <code>http://localhost:8787</code>. It is the human face of the SDK: toggle enforcement on/off, watch the gate run live, and see the AI-control number (<code>0</code> under control · <code>1</code> a control broke · <code>2</code> could not check) with yes/no ticks. It runs on your machine and nothing leaves it. It is a command you run, not a daemon — start it when you want the panel.</p>
     </div>
 
     <details style="margin-top:28px">
@@ -171,6 +177,7 @@ valiant licence --sync https://vvs.morpheus.nz/revocations.vvs   # pick up the r
       <tr><td>GitLab CI</td><td><code>valiant ci-init gitlab</code></td><td>a <code>.gitlab-ci.yml</code> job</td></tr>
       <tr><td>Security tab</td><td><code>valiant verify --format sarif</code></td><td>one SARIF 2.1.0 document: broken → <code>error</code>, could-not-check → <code>warning</code></td></tr>
       <tr><td>Any agent (MCP)</td><td><code>valiant mcp</code></td><td>five tools returning the exit code and the contract results as data</td></tr>
+      <tr><td>Control panel (GUI)</td><td><code>valiant ui</code></td><td>a local web app — toggle enforcement, watch the gate, tick the AI-control ledger</td></tr>
     </table></div>
       <p class="swipe">Swipe the table sideways to see every column →</p>
     <p class="note">Every one of these ships inside the same tarball. There are no add-on downloads, and no feature a higher tier unlocks.</p>
