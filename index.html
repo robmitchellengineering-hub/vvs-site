@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Valiant Verification Systems — verification for complex systems</title>
-<meta name="description" content="We turn 'trusted' into a verification deficit, a gate and a certified reference — for any complex system, from physics to climate to AI.">
+<title>Valiant Verification Systems — measure control, not capability</title>
+<meta name="description" content="What gets measured gets optimized. The industry measures AI capability. VVS measures the other half: control — every action approved, every claim traceable, every intent restated before it acts, as a mutation-tested number.">
 <link rel="icon" type="image/png" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/favicon-180.png">
-<meta property="og:title" content="Valiant Verification Systems — verification for complex systems">
-<meta property="og:description" content="Trust is not a vibe. It&rsquo;s a number. The verification deficit, the gate and the certified reference for any complex system.">
+<meta property="og:title" content="Valiant Verification Systems — AI under human control, as a number">
+<meta property="og:description" content="What gets measured gets optimized. The industry measures AI capability. VVS measures the other half: control.">
 <meta property="og:image" content="https://vvs.morpheus.nz/assets/social-card.png">
 <meta property="og:url" content="https://vvs.morpheus.nz/">
 <meta name="twitter:card" content="summary_large_image">
@@ -144,15 +144,43 @@
 <header>
   <div class="wrap">
     <img class="badge" src="assets/badge.png" alt="Valiant Verification Systems badge">
-    <div class="kicker">The AI verification SDK</div>
-    <h1>Trust is not a vibe.<br>It's a <em>number</em>.</h1>
-    <p class="lede">The <strong>Valiant Verification SDK</strong> runs your project’s own checks and proves each one can fail — a gate that is skipped, neutral, or exits zero with no output is a fail, not a pass.</p>
+    <div class="kicker">The AI control SDK</div>
+    <h1>AI under human control.<br>As a <em>number</em>.</h1>
+    <p class="lede">What gets measured gets optimized — and the industry only measures AI <em>capability</em>. VVS measures the other half: <strong>control</strong>. Every action approved, every claim traceable, every intent restated before it acts — and a mutation-tested number proves it: <code>0 = under control · 1 = a control broke · 2 = could not check</code>.</p>
     <div class="cta">
       <a class="btn primary" href="#products">Get the SDK</a>
       <a class="btn ghost" href="#proof">See the proof</a>
     </div>
   </div>
 </header>
+
+<section id="control">
+  <div class="wrap">
+    <div class="kicker">AI control, measured</div>
+    <h2>"Clarity creates agency, clarity creates courage."</h2>
+    <p class="muted" style="max-width:820px">— Aza Raskin, Center for Humane Technology. That clarity is exactly what VVS makes mechanical: the asked-vs-meant gap, turned into a check you can run.</p>
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card"><div class="tag">approved</div><h3>Every action needs a human yes</h3><p class="muted">An AI agent records what it is about to do; an unapproved action is a control break, logged and blocked.</p></div>
+      <div class="card"><div class="tag">traceable</div><h3>Every claim points at a source you can re-open</h3><p class="muted">No "the AI says so" — ground truth a human can re-check, the way you'd want to check us.</p></div>
+      <div class="card"><div class="tag">restated</div><h3>The agent says what it <em>means</em>, you confirm, then it acts</h3><p class="muted">AI is an alien intelligence: it optimises what you wrote, not what you meant. This closes the gap before the action, not after.</p></div>
+    </div>
+    <p class="muted" style="margin-top:20px;max-width:820px"><strong>Constraint first as wisdom.</strong> We take the one constraint that matters — the AI stays under human control — and turn it into a falsifiable, mutation-tested guard. <code>valiant control</code> gives the number; <code>valiant control --prove</code> lets anyone re-run the proof that the guard catches a violation. <code>valiant ui</code> is the panel you tick it in.</p>
+  </div>
+</section>
+
+<section id="proof-engine">
+  <div class="wrap">
+    <div class="kicker">The proof engine</div>
+    <h2>Guaranteed by a kernel, not just checked by a run.</h2>
+    <p class="muted" style="max-width:820px">Verification comes in grades, and we climb to the top. A computation that could be wrong, an exact symbolic proof at fixed cases, and then <strong>machine-checked proof</strong> — a theorem the prover's <em>kernel</em> accepts for <em>every</em> case, not a result a run happened to produce.</p>
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card"><div class="tag">1 · numerical</div><h3>Evidence, not proof</h3><p class="muted">A computation that could be wrong — useful, but a check, not a guarantee.</p></div>
+      <div class="card"><div class="tag">2 · symbolic exact</div><h3>Exact, at fixed cases</h3><p class="muted">sympy, zero tolerance — the expression is exact, but only where it was evaluated.</p></div>
+      <div class="card"><div class="tag">3 · machine-checked</div><h3>Lean 4 + Mathlib</h3><p class="muted">The statement is verified by the theorem prover's kernel, for every case. No <code>sorry</code>, no <code>axiom</code>, no <code>native_decide</code> — every line checked. That is a <em>guarantee</em>.</p></div>
+    </div>
+    <p class="muted" style="margin-top:20px;max-width:820px"><strong>Already proven, kernel-checked:</strong> Mitchell's Uniqueness Theorem (the tadpole FᵀJH is the only symplectic invariant) for n=1 and general n over any field, the completeness/transitivity half for n=1, and the FFT invariant slices at degrees 1–4. The general-degree FFT is cited (Weyl 1939) and symbolically verified, not yet formalized — stated, not hidden. Reproduce it yourself: <code>cd pacland-proof && lake build</code> — a green build means the kernel accepted every theorem.</p>
+  </div>
+</section>
 
 <section id="products">
   <div class="wrap">
