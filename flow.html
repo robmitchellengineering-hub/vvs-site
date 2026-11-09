@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VVS SDK — how it verifies (flow)</title>
+<style>
+  html,body{margin:0;padding:0;background:#0b1626;color:#e7eef7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  .stage{max-width:1120px;margin:0 auto;padding:36px 24px 80px}
+  .hint{text-align:center;color:#8ba3bc;font-size:13px;margin:0 0 10px}
+  svg{width:100%;height:auto;display:block}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:26px;font-size:13px;color:#c7d5e4}
+  .legend b{font-weight:700}
+</style>
+</head>
+<body>
+<div class="stage">
+<p class="hint">VVS SDK — how it verifies &nbsp;·&nbsp; zoom with Ctrl/Cmd + scroll, or pinch</p>
+
+<svg viewBox="0 0 1160 2260" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e2a4a"/><stop offset="1" stop-color="#0b1626"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0e9d8f"/><stop offset="1" stop-color="#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16283f"/><stop offset="1" stop-color="#112137"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b8bb8"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1160" height="2260" fill="url(#bg)"/>
+
+  <!-- title -->
+  <text x="580" y="70" text-anchor="middle" font-size="42" font-weight="800" fill="#f2f8ff" letter-spacing="-0.5">The VVS SDK, in one flow</text>
+  <text x="580" y="104" text-anchor="middle" font-size="16" fill="#8ba3bc">run it honestly · break it on purpose · a number, never an adjective</text>
+
+  <!-- NODE 1 -->
+  <g>
+    <rect x="230" y="140" width="700" height="78" rx="16" fill="url(#card)" stroke="#2c4868" stroke-width="1.5"/>
+    <text x="580" y="172" text-anchor="middle" font-size="17" font-weight="700" fill="#14b8a6">1 · YOUR REPO + YOUR CHECKS</text>
+    <text x="580" y="196" text-anchor="middle" font-size="13.5" fill="#c7d5e4">unit tests · typecheck · lint · build · your own rules</text>
+  </g>
+
+  <!-- arrow 1 -->
+  <line x1="580" y1="218" x2="580" y2="262" stroke="#5b8bb8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="596" y="246" font-size="12" fill="#5b8bb8">valiant setup</text>
+
+  <!-- NODE 2 -->
+  <g>
+    <rect x="230" y="268" width="700" height="92" rx="16" fill="url(#card)" stroke="#2c4868" stroke-width="1.5"/>
+    <text x="580" y="298" text-anchor="middle" font-size="17" font-weight="700" fill="#14b8a6">2 · valiant.json — a gate is 3 things</text>
+    <text x="580" y="322" text-anchor="middle" font-size="13" fill="#c7d5e4" font-family="ui-monospace,Menlo,monospace">{ cmd: [&quot;node&quot;,&quot;test.js&quot;] , subject: &quot;src/foo.js&quot; , sabotage: {find, replace} }</text>
+    <text x="580" y="344" text-anchor="middle" font-size="12.5" fill="#8ba3bc">the command to run · the file it protects · how to break that file</text>
+  </g>
+
+  <!-- arrow 2 -->
+  <line x1="580" y1="360" x2="580" y2="404" stroke="#5b8bb8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="596" y="388" font-size="12" fill="#5b8bb8">valiant mutate</text>
+
+  <!-- NODE 3 (mutate) -->
+  <g>
+    <rect x="150" y="410" width="860" height="356" rx="20" fill="#10233a" stroke="#14b8a6" stroke-width="1.5" filter="url(#glow)"/>
+    <text x="580" y="446" text-anchor="middle" font-size="19" font-weight="800" fill="#f2f8ff">3 · MUTATE — break the code, the check must notice</text>
+
+    <rect x="196" y="468" width="768" height="52" rx="12" fill="#0f1d30" stroke="#2c4868"/>
+    <text x="580" y="491" text-anchor="middle" font-size="13.5" fill="#c7d5e4">copy the repo (throwaway) → count find matches → run check clean → apply sabotage → run again → undo</text>
+
+    <!-- verdict chips -->
+    <rect x="196" y="536" width="372" height="52" rx="12" fill="#0f1d30" stroke="#fbbf24"/>
+    <text x="382" y="558" text-anchor="middle" font-size="14" font-weight="700" fill="#fbbf24">STALE / ALWAYS-RED</text>
+    <text x="382" y="577" text-anchor="middle" font-size="12" fill="#c7d5e4">find matched 0/2+ sites · or red with nothing broken</text>
+
+    <rect x="592" y="536" width="372" height="52" rx="12" fill="#0f1d30" stroke="#f87171"/>
+    <text x="778" y="558" text-anchor="middle" font-size="14" font-weight="700" fill="#f87171">SURVIVED</text>
+    <text x="778" y="577" text-anchor="middle" font-size="12" fill="#c7d5e4">green WITH the sabotage applied — the check is lying</text>
+
+    <rect x="196" y="600" width="372" height="52" rx="12" fill="#0f1d30" stroke="#f87171"/>
+    <text x="382" y="622" text-anchor="middle" font-size="14" font-weight="700" fill="#f87171">UNSTABLE</text>
+    <text x="382" y="641" text-anchor="middle" font-size="12" fill="#c7d5e4">stayed red after undo — depends on outside state</text>
+
+    <rect x="592" y="600" width="372" height="52" rx="12" fill="#0f1d30" stroke="#34d399"/>
+    <text x="778" y="622" text-anchor="middle" font-size="14" font-weight="700" fill="#34d399">CAUGHT ✓</text>
+    <text x="778" y="641" text-anchor="middle" font-size="12" fill="#c7d5e4">red under sabotage, green once undone — the check is real</text>
+
+    <text x="580" y="712" text-anchor="middle" font-size="13" fill="#8ba3bc">only CAUGHT is allowed to call a check verified</text>
+    <rect x="330" y="726" width="500" height="24" rx="12" fill="#0e9d8f" opacity="0.15"/>
+    <text x="580" y="743" text-anchor="middle" font-size="12.5" fill="#34d399">every verdict is a code path, not an opinion</text>
+  </g>
+
+  <!-- arrow 3 -->
+  <line x1="580" y1="766" x2="580" y2="810" stroke="#5b8bb8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="596" y="794" font-size="12" fill="#5b8bb8">valiant gate</text>
+
+  <!-- NODE 4 (gate) -->
+  <g>
+    <rect x="230" y="816" width="700" height="78" rx="16" fill="url(#card)" stroke="#2c4868" stroke-width="1.5"/>
+    <text x="580" y="846" text-anchor="middle" font-size="17" font-weight="700" fill="#14b8a6">4 · GATE — spawn the command, read the exit code</text>
+    <text x="580" y="870" text-anchor="middle" font-size="13.5" fill="#c7d5e4"><tspan fill="#34d399" font-weight="700">0</tspan> holds · <tspan fill="#f87171" font-weight="700">1</tspan> broken · <tspan fill="#fbbf24" font-weight="700">2</tspan> could-not-run &nbsp;+&nbsp; <tspan fill="#f87171" font-weight="700">exit 0 with no output = fail</tspan></text>
+  </g>
+
+  <!-- arrow 4 -->
+  <line x1="580" y1="894" x2="580" y2="938" stroke="#5b8bb8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="596" y="922" font-size="12" fill="#5b8bb8">valiant verify</text>
+
+  <!-- NODE 5 (verify) -->
+  <g>
+    <rect x="230" y="944" width="700" height="92" rx="16" fill="url(#card)" stroke="#2c4868" stroke-width="1.5"/>
+    <text x="580" y="974" text-anchor="middle" font-size="17" font-weight="700" fill="#14b8a6">5 · VERIFY — the full proof</text>
+    <text x="580" y="998" text-anchor="middle" font-size="13.5" fill="#c7d5e4">your gates &nbsp;+&nbsp; the shipped corpus (46 invariants · 29 guards) &nbsp;+&nbsp; self-check</text>
+    <text x="580" y="1020" text-anchor="middle" font-size="12.5" fill="#8ba3bc">SELF.json = sha256 of every SDK file — the SDK verifies itself first</text>
+  </g>
+
+  <!-- arrow 5 -->
+  <line x1="580" y1="1036" x2="580" y2="1080" stroke="#5b8bb8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="596" y="1064" font-size="12" fill="#5b8bb8">enforce --install</text>
+
+  <!-- NODE 6 (enforce) -->
+  <g>
+    <rect x="230" y="1086" width="700" height="92" rx="16" fill="url(#card)" stroke="#2c4868" stroke-width="1.5"/>
+    <text x="580" y="1116" text-anchor="middle" font-size="17" font-weight="700" fill="#14b8a6">6 · ENFORCE — block, don't just report</text>
+    <text x="580" y="1140" text-anchor="middle" font-size="13.5" fill="#c7d5e4">PreToolUse / Stop hook runs <tspan font-family="ui-monospace,Menlo,monospace">valiant gate --hook</tspan> when an agent tries to finish</text>
+    <text x="580" y="1162" text-anchor="middle" font-size="12.5" fill="#8ba3bc">non-zero exit → the agent is blocked and handed the reason · MCP exposes 5 tools</text>
+  </g>
+
+  <!-- arrow 6 -->
+  <line x1="580" y1="1178" x2="580" y2="1222" stroke="#5b8bb8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="596" y="1206" font-size="12" fill="#5b8bb8">valiant control</text>
+
+  <!-- NODE 7 (control) -->
+  <g>
+    <rect x="230" y="1228" width="700" height="92" rx="16" fill="url(#card)" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="580" y="1258" text-anchor="middle" font-size="17" font-weight="700" fill="#14b8a6">7 · CONTROL — did the AI stay under a human?</text>
+    <text x="580" y="1282" text-anchor="middle" font-size="13.5" fill="#c7d5e4">every action logged (approved · traceable · restated) → three guards → one number</text>
+    <text x="580" y="1304" text-anchor="middle" font-size="13" fill="#c7d5e4"><tspan fill="#34d399" font-weight="700">0</tspan> under control · <tspan fill="#f87171" font-weight="700">1</tspan> a control broke · <tspan fill="#fbbf24" font-weight="700">2</tspan> could not check</text>
+  </g>
+
+  <!-- arrow 7 -->
+  <line x1="580" y1="1320" x2="580" y2="1364" stroke="#5b8bb8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="596" y="1348" font-size="12" fill="#5b8bb8">valiant ui</text>
+
+  <!-- NODE 8 (gui) -->
+  <g>
+    <rect x="230" y="1370" width="700" height="78" rx="16" fill="url(#card)" stroke="#2c4868" stroke-width="1.5"/>
+    <text x="580" y="1400" text-anchor="middle" font-size="17" font-weight="700" fill="#14b8a6">8 · THE CONTROL PANEL (GUI)</text>
+    <text x="580" y="1424" text-anchor="middle" font-size="13.5" fill="#c7d5e4">toggle enforcement · watch the gate tick live · tick the AI-control ledger · activate licence · run setup</text>
+  </g>
+
+  <!-- the honest boundary -->
+  <g>
+    <rect x="230" y="1490" width="700" height="88" rx="18" fill="#0e9d8f" opacity="0.10" stroke="#14b8a6" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <text x="580" y="1522" text-anchor="middle" font-size="16" font-weight="800" fill="#34d399">THE HONEST BOUNDARY</text>
+    <text x="580" y="1548" text-anchor="middle" font-size="14" fill="#e7eef7">VVS verifies your <tspan font-weight="700">verification</tspan>, not your code</text>
+    <text x="580" y="1568" text-anchor="middle" font-size="12.5" fill="#8ba3bc">it proves each check can fail — coverage is still your job (correctness is undecidable)</text>
+  </g>
+
+  <!-- legend -->
+  <g font-size="13">
+    <text x="580" y="1630" text-anchor="middle" font-size="15" font-weight="800" fill="#f2f8ff">LEGEND</text>
+    <rect x="270" y="1650" width="16" height="16" rx="4" fill="#14b8a6"/><text x="294" y="1663" fill="#c7d5e4">the SDK's action</text>
+    <rect x="470" y="1650" width="16" height="16" rx="4" fill="#34d399"/><text x="494" y="1663" fill="#c7d5e4">pass / real</text>
+    <rect x="640" y="1650" width="16" height="16" rx="4" fill="#f87171"/><text x="664" y="1663" fill="#c7d5e4">fail / broken</text>
+    <rect x="800" y="1650" width="16" height="16" rx="4" fill="#fbbf24"/><text x="824" y="1663" fill="#c7d5e4">cannot-check / suspect</text>
+  </g>
+</svg>
+
+<div class="legend">
+  <span><b style="color:#14b8a6">●</b> SDK action</span>
+  <span><b style="color:#34d399">●</b> pass / real</span>
+  <span><b style="color:#f87171">●</b> fail / broken</span>
+  <span><b style="color:#fbbf24">●</b> cannot-check / suspect</span>
+</div>
+</div>
+</body>
+</html>
