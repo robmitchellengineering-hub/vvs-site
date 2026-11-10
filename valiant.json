@@ -64,5 +64,8 @@
         "/Users/mac/code/valiant-verification-sdk"
       ]
     }
+  ],
+  "hooks": [
+    "pre-push:gate"
   ]
 }
