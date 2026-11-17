@@ -1,7 +1,12 @@
 {
- "latest": "0.17.2",
+ "latest": "0.17.3",
  "updated": "2026-11-09",
  "versions": [
+  {
+   "version": "0.17.3",
+   "sha256": "2f88ddfe091c443d0cd3ec09850b37254be04df3f85356e8542c39acb087d28a",
+   "size": 264830
+  },
   {
    "version": "0.17.2",
    "sha256": "ef9d73af36ed2dd21adf1801e515f703d999d06da423cb5193ee15d0869d5d33",
