@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What Valiant proves — verification &amp; control for AI-written code</title>
+<title>What Valiant proves — independent verification of AI-written code</title>
 <style>
   :root { --bg:#0a1524; --panel:#0f1f33; --ink:#e6eef7; --dim:#9db2c8; --good:#38d39f; --bad:#ff7b7b; --accent:#6ea8fe; }
   * { box-sizing:border-box; }
@@ -30,8 +30,25 @@
 <body>
 <main>
   <h1>What Valiant proves</h1>
-  <p class="lead">The AI says <em>done</em>. Valiant makes <em>done</em> mean <strong>proven</strong> — with a human tether and a tamper-evident record of every yes.</p>
+  <p class="lead">The AI says <em>done</em>. Valiant is the <strong>independent third party</strong> that makes <em>done</em> mean <strong>proven</strong> — with a human tether and a tamper-evident record of every yes.</p>
   <p class="lead">It is the one tool that closes the whole loop — <strong>verify → prove → block → coach → record → assure</strong> — for code an AI wrote.</p>
+
+  <p class="lead">Three ideas put Valiant on the other side of the table from a governance checklist:</p>
+
+  <div class="card">
+    <p class="fear">The derivation is the asset, not the answer.</p>
+    <p class="answer">The machine-checkable steps an AI took — not just the result it printed — are the part you can reuse, teach and audit. An answer with no derivation is a rumour.</p>
+  </div>
+
+  <div class="card">
+    <p class="fear">Who proofs the proofs?</p>
+    <p class="answer">A checker small enough to audit — the Lean kernel — and a check that has been <em>proven to fail</em> (mutation). The regress stops there, not at another model grading its own work.</p>
+  </div>
+
+  <div class="card">
+    <p class="fear">An independent third party.</p>
+    <p class="answer">A signed verdict you re-run offline. Valiant's word is never the last word — the bytes are.</p>
+  </div>
 
   <h2>The fears, and what Valiant does about each</h2>
 
