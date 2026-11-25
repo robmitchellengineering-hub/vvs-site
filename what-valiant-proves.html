@@ -30,7 +30,7 @@
 <body>
 <main>
   <h1>What Valiant proves</h1>
-  <p class="lead">The AI says <em>done</em>. Valiant is the <strong>independent third party</strong> that makes <em>done</em> mean <strong>proven</strong> — with a human tether and a tamper-evident record of every yes.</p>
+  <p class="lead">The AI says <em>done</em>. Valiant is the <strong>independent third party</strong> that makes <em>done</em> mean <strong>proven</strong> — with a human tether and a tamper-evident record of every action, and what approved it.</p>
   <p class="lead">It is the one tool that closes the whole loop — <strong>verify → prove → block → coach → record → assure</strong> — for code an AI wrote.</p>
 
   <p class="lead">Three ideas put Valiant on the other side of the table from a governance checklist:</p>
@@ -54,32 +54,32 @@
 
   <div class="card">
     <p class="fear">“The agent said done, and it wasn't.”</p>
-    <p class="answer">Valiant's gate is a verdict, not a claim — <code>0</code> holds · <code>1</code> broken · <code>2</code> could not check. An agent cannot report “passing” unless the exit code is <code>0</code>.</p>
+    <p class="answer">Valiant's gate is a verdict, not a claim — <code>0</code> holds · <code>1</code> broken · <code>2</code> could not check. <strong>Exit 0 is a contract, not a certificate:</strong> it means the checks you declared all passed — it is exactly as good as those checks, and it never lets an agent report “passing” unless the exit code is <code>0</code>.</p>
   </div>
 
   <div class="card">
     <p class="fear">“Green, but nothing actually ran.”</p>
-    <p class="answer">Valiant <em>proves the check can fail</em> — it sabotages the code and requires the check to catch it (mutation). A check that can't be made to fail is refused. This is the fix for the “green lie”.</p>
+    <p class="answer">Valiant <em>proves the check can fail</em> — it sabotages the code and requires the check to go red, then green when the sabotage is undone (mutation). A check that can't be made to fail is refused. Honest scope: this proves the check catches <em>that seeded break</em> — it does not prove the check catches every defect a future change could introduce.</p>
   </div>
 
   <div class="card">
     <p class="fear">“Nobody can tell me who approved this.”</p>
-    <p class="answer">Every action is recorded <code>approved / restated / traceable</code>, hash-chained. <code>valiant audit</code> prints the whole decision trail — who did what, who said yes, on what evidence.</p>
+    <p class="answer">Every action is recorded with its <strong>approval category</strong> — <code>human-approved</code> · <code>policy-authorised</code> (a safe read-only auto-approval) · <code>pending</code> (awaiting your tick) · <code>rejected</code> — plus <code>restated</code> and <code>traceable</code>, hash-chained. <code>valiant audit</code> prints the whole trail, and nothing reports “approved” unless the record says which kind.</p>
   </div>
 
   <div class="card">
     <p class="fear">“There's no off switch.”</p>
-    <p class="answer">The Stop hook halts the agent the moment it tries to finish red, and the control number (<code>0/1/2</code>) says whether it is under human authority.</p>
+    <p class="answer">The Stop hook halts the agent the moment it tries to finish red — in every environment where the hook is installed (pre-push, DSH and Claude Stop hooks). The control number (<code>0/1/2</code>) says whether it is under human authority. Honest limit: the hook is only as strong as the environment that runs it — a bypassed hook is a bypass, and the ledger records that it happened.</p>
   </div>
 
   <div class="card">
     <p class="fear">“The agent hides or mis-states what it did.”</p>
-    <p class="answer">The tamper-evident pack bundles every hash and signature, so a third party can verify the artefact offline — and the agent's own account is checked against the diff, not its narration.</p>
+    <p class="answer">The tamper-evident pack bundles every file's <code>sha256</code> and a signed manifest, so a third party verifies offline: <code>valiant pack --verify</code> recomputes each hash and checks the signature against the public key shipped with the SDK. The agent's recorded actions and outcomes are compared to the actual diff — a claim that does not match the change it made is caught. It checks the account against the record, not the narration; it cannot read intent that was never written down.</p>
   </div>
 
   <div class="card">
     <p class="fear">“Approval is just rubber-stamping.”</p>
-    <p class="answer">Risk-tiered approval: read-only actions are auto-approved, write/network/secret actions require a real human tick — so the human's attention goes where the blast radius is.</p>
+    <p class="answer">Risk-tiered approval, recorded as a category not a blanket: genuinely read-only actions are <code>policy-authorised</code> (auto-approved by a conservative allowlist — no writes, no shell syntax, no secret paths); write / network / secret actions are <code>pending</code> until you tick them; a <code>rejected</code> action blocks. The human's attention goes where the blast radius is, and the ledger names which category every action got.</p>
   </div>
 
   <div class="card">
@@ -104,15 +104,16 @@
   <table>
     <tr><th>level</th><th>what it proves</th><th>the statutory controls it satisfies</th></tr>
     <tr><td><b>L1 — Verified</b></td><td>the gate runs, done is a 0/1/2 verdict</td><td>NIST AI RMF Measure · EU AI Act Art 15</td></tr>
-    <tr><td><b>L2 — Proven</b></td><td>+ the checks provably fail + a human ticks every action</td><td>NIST Govern · EU AI Act Art 14</td></tr>
+    <tr><td><b>L2 — Proven</b></td><td>+ the checks provably fail + every consequential action is human-ticked (safe read-only auto-approval excepted, and recorded as such)</td><td>NIST Govern · EU AI Act Art 14</td></tr>
     <tr><td><b>L3 — Assured</b></td><td>+ a signed evidence bundle a third party verifies offline</td><td>EU AI Act Art 12 · ISO 42001 §7.5/§9</td></tr>
   </table>
-  <p class="lead">Every guard is also graded by <b>evidence class</b> (not just feature): <b>empirical</b> (mutation-tested), <b>exact</b> (structurally proved by VVS's own kernel), <b>kernel</b> (Lean-checked — the black-box formalisation, generated by <code>valiant kernel --lean</code> and type-checked in the pacland theorem tower).</p>
+  <p class="lead">Every guard is also graded by <b>evidence class</b> — three classes that reinforce, not substitute for each other: <b>empirical</b> (mutation-tested: the check caught a real seeded break), <b>exact</b> (structurally proved by VVS's own kernel: the sabotage is unambiguous and the check is well-formed), <b>kernel</b> (Lean-checked: the claim that <em>has</em> a formal proof is type-checked in the pacland theorem tower). The kernel class applies only to the claims that are provable — the black-box behaviour of your check is observed, not proved.</p>
 
   <h2>Use it</h2>
-  <pre>curl -fsSL https://vvs.morpheus.nz/install.sh | sh
-valiant licence &lt;your-token&gt;
-cd your-project &amp;&amp; valiant setup      # one command wires the gate, hooks, MCP and self-heal</pre>
+  <pre>curl -fsSL https://vvs.morpheus.nz/install.sh | sh   # installs the CLI, opens the control panel
+# panel: 14-day trial → add a repo → toggle enforcement (no terminal after this)
+valiant licence --file ./acme.licence                 # or CLI: your own licence, once per machine
+valiant init                                          # adopt a repo (one valiant.json)</pre>
   <p class="lead">The agent gets the full operating manual automatically over MCP (no copy-paste); this is what it says:</p>
   <pre>1. VERDICT — before reporting done, call valiant_gate: 0 holds · 1 broken · 2 could-not-check.
 2. COACHING LOOP — read the why + fix, re-run until 0. Do not bypass the block.
